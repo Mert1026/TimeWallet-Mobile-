@@ -1,0 +1,31 @@
+<Shell
+    x:Class="TimeWallet_Mobile_.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:TimeWallet_Mobile_"
+    Shell.FlyoutBehavior="Disabled"
+    Title="TimeWallet_Mobile_">
+
+    <!-- ShellContent for LoginPage, outside of TabBar -->
+    <TabBar>
+        <Tab Title="Home">
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:NewPage1}"/>
+        </Tab>
+        <Tab Title="Home">
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:NewPage2}"/>
+        </Tab>
+        <Tab Title="Home">
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:UserMainPage}"/>
+        </Tab>
+        <Tab Title="Home">
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:UserMainPage_TEST}"/>
+        </Tab>
+    </TabBar>
+
+
+
+
+
+</Shell>
+
+

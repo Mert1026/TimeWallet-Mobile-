@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TimeWallet_Mobile_.LoginPage"
+             Title="LoginPage"
+             BackgroundColor="#E6F0DA">
+    <Grid>
+        <!-- Background Decorative Circles -->
+        <!--<Ellipse Fill="DarkGreen" WidthRequest="180" HeightRequest="180"
+         Opacity="0.2" VerticalOptions="Start" HorizontalOptions="Center"
+         TranslationX="50" TranslationY="50"/>
+
+<Ellipse Fill="DarkGreen" WidthRequest="150" HeightRequest="150"
+         Opacity="0.2" VerticalOptions="End" HorizontalOptions="End"
+         TranslationX="-40" TranslationY="-50"/>-->
+
+        <!-- Login Card -->
+
+
+
+        <Frame BackgroundColor="#e0f2d8"
+       CornerRadius="10"
+       Padding="20"
+       WidthRequest="350"
+       HasShadow="True"
+       VerticalOptions="Center"
+       HorizontalOptions="Center">
+
+            <StackLayout Spacing="25">
+
+                <!-- Title -->
+                <Label Text="Login" FontSize="35" FontAttributes="Bold" 
+               HorizontalOptions="Center" TextColor="Black"/>
+
+                <StackLayout Spacing="15">
+
+
+                    <!-- Email Input -->
+                    <StackLayout>
+                        <Label Text="Email" FontSize="16" TextColor="Black"/>
+                        <Entry x:Name="txtEmail" Placeholder="Email"
+                       Keyboard="Email" BackgroundColor="#F7F7F7"
+                       TextColor="Black"/>
+                    </StackLayout>
+
+                    <!-- Password Input -->
+                    <StackLayout>
+                        <Label Text="Password" FontSize="16" TextColor="Black"/>
+                        <Entry x:Name="txtPassword" Placeholder="Password"
+                       IsPassword="True" BackgroundColor="#F7F7F7"
+                       TextColor="Black"/>
+                    </StackLayout>
+
+                    <!-- Remember Password Checkbox -->
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="RememberMeCheckBox"/>
+                        <Label Text="Remember me?" FontSize="14"
+                       VerticalOptions="Center" TextColor="#0a5d40"/>
+                    </StackLayout>
+
+                    <!-- Login Button -->
+                    <Button Text="Login"
+                    BackgroundColor="#0F4D36"
+                    TextColor="#e0f2d8"
+                    FontSize="18"
+                    CornerRadius="8"
+                    Clicked="OnLoginClicked"
+                    />
+
+                    <!-- Register Navigation -->
+                    <StackLayout Orientation="Horizontal"
+                    HorizontalOptions="Center">
+                        <Label Text="Don't have an account? Click here."
+                    FontSize="12"
+                    TextDecorations="Underline"
+                    TextColor="#0a5d40">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnRegisterTapped"/>
+                            </Label.GestureRecognizers>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="HoverStateGroup">
+                                    <VisualState Name="NormalSate">
+                                        <VisualState.Setters>
+                                            <Setter Property="TextColor" Value="#0a5d40"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState Name="PointerOverState">
+                                        <VisualState.Setters>
+                                            <Setter Property="TextColor" Value="Red"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Label>
+                    </StackLayout>
+
+
+
+                </StackLayout>
+
+            </StackLayout>
+        </Frame>
+        <StackLayout Orientation="Horizontal"
+                 HorizontalOptions="Center">
+            <Label 
+               x:Name="txtResult"
+               Text="" FontSize="21"
+               TextDecorations="Underline"
+               TextColor="#0a5d40">
+            </Label>
+        </StackLayout>
+    </Grid>
+</ContentPage>

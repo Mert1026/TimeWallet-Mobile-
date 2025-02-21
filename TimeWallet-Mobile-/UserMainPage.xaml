@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             x:Class="TimeWallet_Mobile_.UserMainPage"
+             Title="UserMainPage">
+    <VerticalStackLayout>
+        <Frame x:Name="ChartFrame" BackgroundColor="DimGrey" Margin="25" HeightRequest="300">
+            <StackLayout>
+                <!-- Frame for the label -->
+                <Frame BackgroundColor="Beige" VerticalOptions="Start">
+                    <Label Text="Last 10 Expenses" TextColor="Black" HorizontalOptions="Center"/>
+                </Frame>
+
+                <!-- First Chart -->
+                <microcharts:ChartView x:Name="LastTenExpensesChart" HeightRequest="200" />
+
+                <!-- Second Chart --><!--
+                <microcharts:ChartView x:Name="lastTenElementsChart" HeightRequest="200"/>-->
+            </StackLayout>
+        </Frame>
+    </VerticalStackLayout>
+</ContentPage>
