@@ -60,7 +60,7 @@ public partial class NewPage1 : ContentPage
                     new Label { Text = $"US${budgeted:F2} Budgeted", FontSize = 14, HorizontalOptions = LayoutOptions.Center },
                     new ProgressBar { Progress = (double)(spent / budgeted), HeightRequest = 5, BackgroundColor = Colors.LightGray, ProgressColor = Colors.Green },
                     new Label { Text = $"US${spent:F2} spent | US${(budgeted - spent):F2} remaining", FontSize = 12, HorizontalOptions = LayoutOptions.Center },
-                    new Button { Text = "View Details", FontSize = 12, Command = new Command(() => ViewDetails(name)) }
+                    new Button { Text = "View Details", FontSize = 12, Command = new Command(() => ViewDetails(name)), BackgroundColor=Color.FromHex("#0a5d40") }
                 }
             },
             BorderColor = Colors.DarkGreen,

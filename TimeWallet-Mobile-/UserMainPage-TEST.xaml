@@ -4,21 +4,40 @@
              xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              x:Class="TimeWallet_Mobile_.UserMainPage_TEST"
              Title="UserMainPage_TEST">
-    <VerticalStackLayout>
-        <Frame x:Name="ChartFrame" BackgroundColor="DimGrey" Margin="25" HeightRequest="300">
-            <StackLayout>
+    <VerticalStackLayout >
+        <Frame x:Name="ChartFrame" BackgroundColor="DimGrey" Margin="25" HeightRequest="440" CornerRadius="20" >
+            <StackLayout Spacing="5">
+                
                 <!-- Frame for the label -->
-                <Frame BackgroundColor="Beige" VerticalOptions="Start">
-                    <Label Text="Last 10 Expenses" TextColor="Black" HorizontalOptions="Center"/>
+                <Frame BackgroundColor="Beige" CornerRadius="25" HeightRequest="50" Padding="0">
+                    <Label Text="Last 10 Expenses" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center"
+                           FontSize="20"/>
                 </Frame>
 
-                <!-- First Chart -->
-                <microcharts:ChartView x:Name="LastTenExpensesChart" HeightRequest="200" />
+                <HorizontalStackLayout Padding="10" Spacing="10" HorizontalOptions="CenterAndExpand">
+                    <Button x:Name="donutChart_btn" HeightRequest="45" WidthRequest="45" CornerRadius="50" Padding="10" Clicked="donutChart_btn_Clicked"  ImageSource="donutchart.svg"/>
+                    <Button x:Name="lineChart_btn"  HeightRequest="45" WidthRequest="45" Padding="10" Clicked="lineChart_btn_Clicked" ImageSource="linechart.svg"/>
+                    <Button x:Name="barChart_btn"  HeightRequest="45" WidthRequest="45" Padding="10" Clicked="barChart_btn_Clicked" ImageSource="barchart.svg"/>
+                </HorizontalStackLayout>
 
-                <!-- Second Chart -->
-                <!--
-            <microcharts:ChartView x:Name="lastTenElementsChart" HeightRequest="200"/>-->
+                <!-- First Chart -->
+                <Frame Margin="0" Padding="10">
+                    <microcharts:ChartView x:Name="LastTenExpensesChart" HeightRequest="200"/>
+                </Frame>
+
+                <HorizontalStackLayout Padding="10" Spacing="10" HorizontalOptions="CenterAndExpand">
+                    <Button x:Name="threeItems_btn" HeightRequest="35" WidthRequest="50" Text="3" Padding="5" FontSize="17" FontAttributes="Bold" Clicked="threeItems_btn_Clicked"/>
+                    <Button x:Name="fiveItems_btn"  HeightRequest="35" WidthRequest="50" Text="5" Padding="5" FontSize="17" FontAttributes="Bold" Clicked="fiveItems_btn_Clicked"/>
+                    <Button x:Name="tenItems_btn"   HeightRequest="35" WidthRequest="50" Text="10" Padding="5" FontSize="17" FontAttributes="Bold" Clicked="tenItems_btn_Clicked"/>
+                </HorizontalStackLayout>
+
             </StackLayout>
         </Frame>
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="35">
+            <Button HeightRequest="100" WidthRequest="130"/>
+            <Button HeightRequest="100" WidthRequest="130"/>
+        </HorizontalStackLayout>
+        <Button WidthRequest="295" Margin="25"/>
+
     </VerticalStackLayout>
 </ContentPage>
