@@ -1,4 +1,4 @@
-using TimeWallet_Mobile_.Data.API_service;
+﻿using TimeWallet_Mobile_.Data.API_service;
 using Newtonsoft.Json;
 using TimeWallet_Mobile_.Data.Models;
 using Microsoft.Maui.Graphics.Text;
@@ -75,28 +75,41 @@ public partial class NewPage2 : ContentPage
             {
                 WidthRequest = _framesInnerWidth,
                 Children =
-                {
-                    new Label { Text = name, FontAttributes = FontAttributes.Bold, FontSize = _nameLabelSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromHex("#0a5d40") },
-                    new Label { Text = $"US${budgeted:F2} Budgeted", FontSize = _infoLabelsSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromHex("#0a5d40") },
-                    new ProgressBar { Progress = (double)(spent / budgeted), HeightRequest = _progressBarHeight, BackgroundColor = Color.FromHex("#c5e7b3"), ProgressColor = Color.FromHex("#0a5d40") },
-                    new Label { Text = $"US${spent:F2} spent | US${(budgeted - spent):F2} remaining", FontSize = _infoLabelsSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromHex("#0a5d40") },
-                    new Button { Text = "View Details", FontSize = _buttonTextSize, Command = new Command(() => ViewDetails(name)), BackgroundColor=Color.FromHex("#0a5d40"), Margin=10, TextColor=Colors.White }
-                }
+        {
+            new Label { Text = name, FontAttributes = FontAttributes.Bold, FontSize = _nameLabelSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromHex("#0a5d40") },
+            new Label { Text = $"US${budgeted:F2} Budgeted", FontSize = _infoLabelsSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromHex("#0a5d40") },
+            new ProgressBar { Progress = (double)(spent / budgeted), HeightRequest = _progressBarHeight, BackgroundColor = Color.FromHex("#c5e7b3"), ProgressColor = Color.FromHex("#0a5d40") },
+            new Label { Text = $"US${spent:F2} spent | US${(budgeted - spent):F2} remaining", FontSize = _infoLabelsSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromHex("#0a5d40") },
+            new Button { Text = "View Details", FontSize = _buttonTextSize, Command = new Command(() => ViewDetails(name)), BackgroundColor=Color.FromHex("#0a5d40"), Margin=10, TextColor=Color.FromHex("#e1f2d9") }
+        }
             },
-            BorderColor = Colors.DarkGreen,
+            BorderColor = Color.FromHex("#15260d"),
             Padding = 10,
             CornerRadius = 10,
             BackgroundColor = Color.FromHex("#e1f3d8"),
             HeightRequest = _framesHeight,
-            Margin = 10
+            HasShadow= true,
+            Margin = 10,
+
+            // 👇 Adding Shadow
+            Shadow = new Shadow
+            {
+                Brush = Color.FromRgba(0, 0, 0, 0.4), // Shadow color (black with 40% opacity)
+                Offset = new Point(5, 5), // Shadow position offset (X, Y)
+                Radius = 20, // Blur radius of the shadow
+                Opacity = 1 // Shadow transparency
+            }
         };
+
+
+
     }
 
 
 
-    private void ViewDetails(string budgetName)
+    private async void ViewDetails(string budgetName)
     {
-        DisplayAlert("Budget Details", $"Details for {budgetName}", "OK");
+        await Navigation.PushAsync(new ViewDetailsPage());
     }
 
     private async void LOGIN_Clicked(object sender, EventArgs e)
@@ -276,9 +289,9 @@ public partial class NewPage2 : ContentPage
 
     private void UpdateFrameColors()
     {
-        levelOne_frame.BackgroundColor = currentLevel >= 1 ? Colors.Green : Colors.Gray;
-        levelTwo_frame.BackgroundColor = currentLevel >= 2 ? Colors.Green : Colors.Gray;
-        levelThree_frame.BackgroundColor = currentLevel >= 3 ? Colors.Green : Colors.Gray;
+        levelOne_frame.BackgroundColor = currentLevel >= 1 ? Color.FromHex("#0a5c41") : Color.FromHex("#e1f3d8");
+        levelTwo_frame.BackgroundColor = currentLevel >= 2 ? Color.FromHex("#0a5c41") : Color.FromHex("#e1f3d8");
+        levelThree_frame.BackgroundColor = currentLevel >= 3 ? Color.FromHex("#0a5c41") : Color.FromHex("#e1f3d8");
     }
 
 }

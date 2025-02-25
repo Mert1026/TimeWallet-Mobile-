@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="TimeWallet_Mobile_.CameraPage"
+             Title="CameraPage"
+             BackgroundColor="#e1f2d9">
+    <VerticalStackLayout>
+        <Frame Margin="20" Padding="10" HeightRequest="550" VerticalOptions="Start" BackgroundColor="#e1f2d9" HasShadow="True">
+            <Frame.Shadow>
+                <Shadow 
+                    Brush="Black" 
+                    Offset="9,00" 
+                    Radius="20" 
+                    Opacity="0.8" />
+            </Frame.Shadow>
+
+            <zxing:CameraBarcodeReaderView
+            x:Name="BarcodeReader"
+            IsDetecting="True"
+            CameraLocation="Rear"
+            BarcodesDetected="BarcodeReader_BarcodesDetected"/>
+        </Frame>
+
+        <HorizontalStackLayout HeightRequest="80">
+            <Button x:Name="goBack_Btn" Clicked="goBack_Btn_Clicked" HeightRequest="50" WidthRequest="80" ImageSource="arrowleft.svg" BackgroundColor="#0a5c41"></Button>
+            <Button x:Name="FlashLight_Btn" Clicked="FlashLight_Btn_Clicked" Margin="65" HeightRequest="80" WidthRequest="80" CornerRadius="80" ImageSource="torchoff.svg" Padding="0" BackgroundColor="#0a5c41">
+                <Button.Shadow>
+                    <Shadow Brush="Black" Offset="6,5" Radius="15" Opacity="0.75"/>
+                </Button.Shadow>
+            </Button>
+        </HorizontalStackLayout>
+
+        
+    </VerticalStackLayout>
+    
+    
+</ContentPage>

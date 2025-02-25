@@ -26,5 +26,8 @@ namespace TimeWallet_Mobile_.Data.Models
 
         [JsonPropertyName("createdAt")]
         public string CreatedAt { get; set; }
+
+        [JsonPropertyName("receiptId")]
+        public int? ReceiptId { get; set; }
     }
 }

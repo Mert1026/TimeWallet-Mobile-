@@ -44,10 +44,6 @@ public partial class LoginPage : ContentPage
 
                 await Navigation.PushAsync(new NewPage1());
                 
-
-
-                //Microsoft.Maui.Controls.Application.Current.MainPage = new Microsoft.Maui.Controls.NavigationPage(new UserMainPage());
-                //Microsoft.Maui.Controls.Application.Current.MainPage = new AppShell();
             }
 
         }
@@ -59,6 +55,6 @@ public partial class LoginPage : ContentPage
     {
         // Navigate to RegisterPage (make sure to create a RegisterPage.xaml)
         //await Navigation.PushAsync(new RegisterPage());
-        await Navigation.PushAsync(new NewPage1());
+        await Navigation.PushAsync(new RegisterPage());
     }
 }

@@ -3,10 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TimeWallet_Mobile_.ViewDetailsPage"
              Title="ViewDetailsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout HorizontalOptions="Center" Padding="20">
+        <Frame x:Name="zoomFrame" BackgroundColor="Grey" WidthRequest="305" HeightRequest="55" HorizontalOptions="Center" CornerRadius="50" Padding="0">
+            <HorizontalStackLayout Padding="0" HorizontalOptions="Center">
+                <Frame x:Name="levelOne_frame" BackgroundColor="Green" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
+                <Frame x:Name="levelTwo_frame" BackgroundColor="Green" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
+                <Frame x:Name="levelThree_frame" BackgroundColor="Green" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
+                <Button x:Name="plus_Clicked" Text="+" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" Clicked="plusBtn_Clicked"></Button>
+                <Button x:Name="minus_Clicked" Text="-" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" VerticalOptions="Center" HorizontalOptions="Center" Clicked="minusBtn_Clicked"></Button>
+            </HorizontalStackLayout>
+        </Frame>
+        <ScrollView HorizontalOptions="Center" >
+            <FlexLayout x:Name="ElementsLayout"
+                Padding="5"
+                Direction="Row"
+                JustifyContent="Center"
+                AlignItems="Center"
+                Wrap="Wrap"
+                AlignContent="Center"
+                >
+            </FlexLayout>
+        </ScrollView>
     </VerticalStackLayout>
+    
 </ContentPage>

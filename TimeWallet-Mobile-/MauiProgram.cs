@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microcharts.Maui;
+using ZXing.Net.Maui.Controls;
 namespace TimeWallet_Mobile_
 {
     public static class MauiProgram
@@ -14,7 +15,8 @@ namespace TimeWallet_Mobile_
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .UseBarcodeReader();
 
 #if DEBUG
     		builder.Logging.AddDebug();

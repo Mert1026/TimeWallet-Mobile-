@@ -62,6 +62,7 @@ public partial class UserMainPage_TEST : ContentPage
         LastTenExpensesChart.Chart = new DonutChart
         {
             Entries = _entries,
+            BackgroundColor = SkiaSharp.SKColor.Parse("#e1f2d9"),
             //LabelOrientation = Orientation.Horizontal, // Adjust label orientation
             //ValueLabelOrientation = Orientation.Horizontal, // Adjust value label orientation
             LabelTextSize = 32
@@ -151,4 +152,8 @@ public partial class UserMainPage_TEST : ContentPage
         LastTenExpensesChart.Chart = new DonutChart { Entries = _entriesToAdd, LabelTextSize = 32 };
     }
 
+    private async void Button_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new CameraPage());
+    }
 }

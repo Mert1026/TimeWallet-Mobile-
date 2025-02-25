@@ -57,8 +57,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\arrowleft.svg" />
 	  <None Remove="Resources\Images\barchart.svg" />
+	  <None Remove="Resources\Images\donutchart.svg" />
 	  <None Remove="Resources\Images\linechart.svg" />
+	  <None Remove="Resources\Images\torchoff.svg" />
+	  <None Remove="Resources\Images\torchon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -69,9 +73,13 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="3.116.1" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Core" Version="3.116.1" />
+		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="CameraPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -79,6 +87,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="NewPage2.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="RegisterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UserMainPage-TEST.xaml">

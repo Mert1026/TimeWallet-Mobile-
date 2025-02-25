@@ -6,28 +6,33 @@
              BackgroundColor="#e1f3d8">
     <ScrollView>
         <VerticalStackLayout Padding="20">
-            <Frame x:Name="zoomFrame" BackgroundColor="Grey" WidthRequest="305" HorizontalOptions="Center" CornerRadius="50">
-                <VerticalStackLayout>
-                    <HorizontalStackLayout Padding="0">
-                        <Frame x:Name="levelOne_frame" BackgroundColor="Green" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
-                        <Frame x:Name="levelTwo_frame" BackgroundColor="Green" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
-                        <Frame x:Name="levelThree_frame" BackgroundColor="Green" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
-                        <Button x:Name="plus_Clicked" Text="+" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" Clicked="plusBtn_Clicked"></Button>
-                        <Button x:Name="minus_Clicked" Text="-" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" VerticalOptions="Center" HorizontalOptions="Center" Clicked="minusBtn_Clicked"></Button>
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
+            <Frame x:Name="zoomFrame" BackgroundColor="#e1f3d8" WidthRequest="305" HeightRequest="55" HorizontalOptions="Center" CornerRadius="50" Padding="0" HasShadow="True">
+                <Frame.Shadow>
+                    <Shadow 
+                        Brush="Black" 
+                        Offset="9,00" 
+                        Radius="20" 
+                        Opacity="0.8" />
+                </Frame.Shadow>
+                <HorizontalStackLayout Padding="0" HorizontalOptions="Center">
+                    <Frame x:Name="levelOne_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
+                    <Frame x:Name="levelTwo_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
+                    <Frame x:Name="levelThree_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
+                    <Button x:Name="plus_Clicked" Text="+" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" Clicked="plusBtn_Clicked" FontAttributes="Bold" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
+                    <Button x:Name="minus_Clicked" Text="-" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" VerticalOptions="Center" HorizontalOptions="Center" Clicked="minusBtn_Clicked" FontFamily="Bold" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
+                </HorizontalStackLayout>
             </Frame>
             <Grid ColumnDefinitions="*,*" Padding="10">
                 <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" >
-                    <Label x:Name="budgeted_Sign" Text="Budgeted" FontAttributes="Bold" FontSize="16" TextColor="Black" HorizontalTextAlignment="Center"/>
-                    <Label x:Name="SummaryBudgeted" FontSize="24" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center"/>
-                    <Label x:Name="currentBalance_Sign_1" Text="Current Balance" FontSize="12" TextColor="Black" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="budgeted_Sign" Text="Budgeted" FontAttributes="Bold" FontSize="16" TextColor="#15260d" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="SummaryBudgeted" FontSize="24" FontAttributes="Bold" TextColor="#15260d" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="currentBalance_Sign_1" Text="Current Balance" FontSize="12" TextColor="#15260d" HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Label x:Name="spent_Sign" Text="Spent" FontAttributes="Bold" FontSize="16" TextColor="Black" HorizontalTextAlignment="Center" />
-                    <Label x:Name="SummarySpent" FontSize="24" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center" />
-                    <Label x:Name="currentBalance_Sign_2" Text="Current Balance" FontSize="12" TextColor="Black" HorizontalTextAlignment="Center" />
+                    <Label x:Name="spent_Sign" Text="Spent" FontAttributes="Bold" FontSize="16" TextColor="#15260d" HorizontalTextAlignment="Center" />
+                    <Label x:Name="SummarySpent" FontSize="24" FontAttributes="Bold" TextColor="#15260d" HorizontalTextAlignment="Center" />
+                    <Label x:Name="currentBalance_Sign_2" Text="Current Balance" FontSize="12" TextColor="#15260d" HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
 
             </Grid>
@@ -40,7 +45,7 @@
             <Frame
     x:Name="budgetFrame"
     WidthRequest="250"
-    BorderColor="DarkGreen"
+    BorderColor="#0a5c41"
     Padding="10"
     CornerRadius="10"
     BackgroundColor="#e1f3d8"
