@@ -109,7 +109,7 @@ public partial class NewPage2 : ContentPage
 
     private async void ViewDetails(string budgetName)
     {
-        await Navigation.PushAsync(new ViewDetailsPage());
+        //await Navigation.PushAsync(new ViewDetailsPage());
     }
 
     private async void LOGIN_Clicked(object sender, EventArgs e)

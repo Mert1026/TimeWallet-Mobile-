@@ -46,7 +46,7 @@ public partial class ViewDetailsPage : ContentPage
             }
         };
 
-    public ViewDetailsPage()
+    public ViewDetailsPage(List<Elements> elements)
 	{
 		InitializeComponent();
         GenerateElementsLayout(elementsList);
