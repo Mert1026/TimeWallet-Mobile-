@@ -4,20 +4,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TimeWallet_Mobile_"
     Shell.FlyoutBehavior="Disabled"
-    Title="TimeWallet_Mobile_">
+    Title="TimeWallet_Mobile_"
+    Shell.TabBarBackgroundColor="#0a5c41"
+    Shell.TabBarForegroundColor="White">
 
     <!-- ShellContent for LoginPage, outside of TabBar -->
     <TabBar>
-        <Tab Title="Home">
+        <Tab Title="Home" Route="home">
             <ShellContent Title="Home" ContentTemplate="{DataTemplate local:NewPage1}"/>
         </Tab>
-        <Tab Title="Home">
-            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:NewPage2}"/>
+        <Tab Title="Budgets" Icon="pigbank.png" Route="budgets">
+            <ShellContent Title="Budgets" ContentTemplate="{DataTemplate local:NewPage2}"/>
         </Tab>
-        <Tab Title="Home">
+        <Tab Title="User" Route="user">
             <ShellContent Title="Home" ContentTemplate="{DataTemplate local:UserMainPage}"/>
         </Tab>
-        <Tab Title="Home">
+        <Tab Title="Test" Icon="home.svg" x:Name="userMainTest" Route="userMainTest">
             <ShellContent Title="Home" ContentTemplate="{DataTemplate local:UserMainPage_TEST}"/>
         </Tab>
     </TabBar>

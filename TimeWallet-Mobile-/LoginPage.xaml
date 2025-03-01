@@ -8,6 +8,8 @@
       VerticalOptions="Center"
       HorizontalOptions="Center">
 
+        
+
         <!-- Login Card -->
         <Frame BackgroundColor="#e0f2d8"
            CornerRadius="10"
@@ -20,37 +22,44 @@
 
             <StackLayout Spacing="25">
 
+                <Button Clicked="Button_Clicked">
+
+                </Button>
+
                 <!-- Title -->
-                <Label Text="Login" FontSize="35" FontAttributes="Bold" 
+                <Label x:Name="MainTextLabel" Text="Login" FontSize="35" FontAttributes="Bold" 
                    HorizontalOptions="Center" TextColor="Black"/>
 
                 <StackLayout Spacing="15">
 
+
                     <!-- Email Input -->
                     <StackLayout>
-                        <Label Text="Email" FontSize="16" TextColor="Black"/>
+                        <Label x:Name="EmailLabel" Text="Email" FontSize="16" TextColor="Black"/>
                         <Entry x:Name="txtEmail" Placeholder="Email"
-                           Keyboard="Email" BackgroundColor="#F7F7F7"
-                           TextColor="Black"/>
+                        Keyboard="Email" BackgroundColor="#F7F7F7"
+                        TextColor="Black"/>
                     </StackLayout>
 
                     <!-- Password Input -->
                     <StackLayout>
-                        <Label Text="Password" FontSize="16" TextColor="Black"/>
+                        <Label x:Name="PasswordLabel" Text="Password" FontSize="16" TextColor="Black"/>
                         <Entry x:Name="txtPassword" Placeholder="Password"
-                           IsPassword="True" BackgroundColor="#F7F7F7"
-                           TextColor="Black"/>
+                        IsPassword="True" BackgroundColor="#F7F7F7"
+                        TextColor="Black"/>
                     </StackLayout>
 
                     <!-- Remember Password Checkbox -->
                     <StackLayout Orientation="Horizontal">
                         <CheckBox x:Name="RememberMeCheckBox"/>
-                        <Label Text="Remember me?" FontSize="14"
-                           VerticalOptions="Center" TextColor="#0a5d40"/>
+                        <Label x:Name="RememberMeLabel" Text="Remember me?" FontSize="14"
+                        VerticalOptions="Center" TextColor="#0a5d40"/>
                     </StackLayout>
 
+
                     <!-- Login Button -->
-                    <Button Text="Login"
+                    <Button x:Name="MainButtonLabel"
+                        Text="Login"
                         BackgroundColor="#0F4D36"
                         TextColor="#e0f2d8"
                         FontSize="18"
@@ -60,7 +69,7 @@
                     <!-- Register Navigation -->
                     <StackLayout Orientation="Horizontal"
                              HorizontalOptions="Center">
-                        <Label Text="Don't have an account? Click here."
+                        <Label x:Name="RegisterNavigationLabel" Text="Don't have an account? Click here."
                            FontSize="12"
                            TextDecorations="Underline"
                            TextColor="#0a5d40">

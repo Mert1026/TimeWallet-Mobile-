@@ -163,14 +163,14 @@ public partial class CameraPage : ContentPage
         if (!isTorchOn)
         {
             FlashLight_Btn.ImageSource = "torchon.svg";
-            FlashLight_Btn.BackgroundColor = Color.FromHex("#e1f2d9");
+            FlashLight_Btn.BackgroundColor = Color.FromArgb("#e1f2d9");
             BarcodeReader.IsTorchOn = true;
             isTorchOn = true;
         }
         else
         {
             FlashLight_Btn.ImageSource = "torchoff.svg";
-            FlashLight_Btn.BackgroundColor = Color.FromHex("#0a5c41");
+            FlashLight_Btn.BackgroundColor = Color.FromArgb("#0a5c41");
             BarcodeReader.IsTorchOn = false;
             isTorchOn = false;
         }
@@ -221,7 +221,7 @@ public partial class CameraPage : ContentPage
                 name = item.Name,
                 budgetId = budgetId.ToString(),
                 amount = item.Amount,
-                createdAt = item.Receipts.DateTime.ToString("MM/dd/yyyy"),
+                createdAt = long.Parse(item.Receipts.DateTime.ToString("MM/dd/yyyy")),
                 receiptId = receiptInfo.Receipt.id
             };
 

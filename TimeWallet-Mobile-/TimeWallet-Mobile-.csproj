@@ -60,7 +60,10 @@
 	  <None Remove="Resources\Images\arrowleft.svg" />
 	  <None Remove="Resources\Images\barchart.svg" />
 	  <None Remove="Resources\Images\donutchart.svg" />
+	  <None Remove="Resources\Images\home.svg" />
 	  <None Remove="Resources\Images\linechart.svg" />
+	  <None Remove="Resources\Images\pigbank.png" />
+	  <None Remove="Resources\Images\piggybank.svg" />
 	  <None Remove="Resources\Images\torchoff.svg" />
 	  <None Remove="Resources\Images\torchon.svg" />
 	</ItemGroup>

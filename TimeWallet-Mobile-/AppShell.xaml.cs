@@ -1,36 +1,44 @@
-﻿namespace TimeWallet_Mobile_
+﻿using Microsoft.Maui.Controls;
+
+namespace TimeWallet_Mobile_
 {
     public partial class AppShell : Shell
     {
         public AppShell()
         {
+            //CurrentItem = Items.FirstOrDefault(item => item.Route == "userMainTest");
+
             InitializeComponent();
 
-
+            
             SetNavBarIsVisible(this, false);
             Routing.RegisterRoute(nameof(NewPage1), typeof(NewPage1));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
 
             NavigationPage.SetHasBackButton(new NewPage1(), false);
+
             // Navigate to Profile page on startup
-            SetStartupPage();
+            //SetStartupPage();
 
         }
 
         private async void SetStartupPage()
         {
-            //string email = await SecureStorage.GetAsync("UserEmail");
 
-            //if (string.IsNullOrEmpty(email))
-            //{
-            //    // Navigate to LoginPage if no email is found
-            //    await GoToAsync(nameof(LoginPage));
-            //}
-            //else
-            //{
-            //    // Navigate to Home (default tab)
-            //    await GoToAsync(nameof(LoginPage));
-            //}
+            string email = "";
+
+            if (string.IsNullOrEmpty(email))
+            {
+                // Navigate to LoginPage if no email is found
+                await GoToAsync(nameof(LoginPage));
+            }
+            else
+            {
+                // Navigate to Home (default tab)
+                // await GoToAsync(nameof(LoginPage));
+                //CurrentItem = Items.FirstOrDefault(item => item.Route == "userMainTest");
+                CurrentItem = FindByName("userMainTest") as Tab;
+            }
         }
     }
 }

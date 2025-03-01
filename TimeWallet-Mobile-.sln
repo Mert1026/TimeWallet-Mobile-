@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeWallet-Mobile-", "TimeWallet-Mobile-\TimeWallet-Mobile-.csproj", "{1ABF03E0-EAD1-4F1C-9E7E-E9E94F93CAE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeWallet-Mobile-", "TimeWallet-Mobile-\TimeWallet-Mobile-.csproj", "{1ABF03E0-EAD1-4F1C-9E7E-E9E94F93CAE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

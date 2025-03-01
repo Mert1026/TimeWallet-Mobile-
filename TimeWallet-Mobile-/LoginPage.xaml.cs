@@ -1,26 +1,40 @@
 using TimeWallet_Mobile_.Data.API_service;
 using TimeWallet_Mobile_.Data.DTO_s.Json;
+using TimeWallet_Mobile_.Data.Translation;
 
 namespace TimeWallet_Mobile_;
 
 public partial class LoginPage : ContentPage
 {
     private readonly ApiService _apiService = new ApiService();
-
+    private Translations _translations;
+    private string _language = "en";
     //private UserMethods userMethods = new UserMethods();
 
     public LoginPage()
     {
         InitializeComponent();
-
+        _translations = new Translations(_language);
+        SetText();
         Shell.SetNavBarIsVisible(this, false);
         // CheckIfThereIsAlreadyLogedAccount();
+    }
+
+    private void SetText()
+    {
+        MainTextLabel.Text = _translations.LoginPageMainText;
+        EmailLabel.Text = _translations.LoginPageEmailText;
+        PasswordLabel.Text = _translations.LoginPagePasswordText;
+        RememberMeLabel.Text = _translations.LoginPageRememberMeText;
+        MainButtonLabel.Text = _translations.LoginPageMainText;
+        RegisterNavigationLabel.Text = _translations.LoginPageFooterText;
+        //InitializeComponent();
     }
 
     private async void OnLoginClicked(object sender, EventArgs e)
     {
         UserDTO user = await _apiService.GetUserAsync(txtEmail.Text);
-        if (user.User.Name == null)
+        if (user == null)
         {
 
         }
@@ -57,4 +71,26 @@ public partial class LoginPage : ContentPage
         //await Navigation.PushAsync(new RegisterPage());
         await Navigation.PushAsync(new RegisterPage());
     }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        if(_language == "bg")
+        {
+            _language = "en";
+        }
+        else
+        {
+            _language = "bg";
+        }
+        
+        _translations = new Translations(_language);
+        SetText();
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        SetText();  // Update text when the page appears
+    }
+
 }

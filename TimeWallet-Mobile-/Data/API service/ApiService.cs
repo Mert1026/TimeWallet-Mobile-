@@ -23,6 +23,7 @@ namespace TimeWallet_Mobile_.Data.API_service
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri("https://localhost:5173/api/timewallet/");
+            //_httpClient.BaseAddress = new Uri("https://timewallet.azurewebsites.net/api/timewallet/");
         }
 
         public async Task<UserBudgetResponseDTO> GetInformationAboutUser(string email)

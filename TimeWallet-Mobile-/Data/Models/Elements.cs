@@ -25,7 +25,7 @@ namespace TimeWallet_Mobile_.Data.Models
         public decimal Amount { get; set; }
 
         [JsonPropertyName("createdAt")]
-        public string CreatedAt { get; set; }
+        public long CreatedAt { get; set; }
 
         [JsonPropertyName("receiptId")]
         public int? ReceiptId { get; set; }

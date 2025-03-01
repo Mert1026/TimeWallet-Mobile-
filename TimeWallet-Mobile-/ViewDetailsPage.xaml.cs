@@ -22,7 +22,7 @@ public partial class ViewDetailsPage : ContentPage
                 Budgets = new Budgets { /* Initialize properties if necessary */ },
                 Name = "Groceries",
                 Amount = 150.75m,
-                CreatedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                CreatedAt = long.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")),
                 ReceiptId = 123
 
             },
@@ -33,7 +33,7 @@ public partial class ViewDetailsPage : ContentPage
                 Budgets = new Budgets { /* Initialize properties if necessary */ },
                 Name = "Rent",
                 Amount = 1200.00m,
-                CreatedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                CreatedAt = long.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
             },
             new Elements
             {
@@ -42,7 +42,7 @@ public partial class ViewDetailsPage : ContentPage
                 Budgets = new Budgets { /* Initialize properties if necessary */ },
                 Name = "Entertainment",
                 Amount = 100.50m,
-                CreatedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                CreatedAt = long.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
             }
         };
 
@@ -84,7 +84,7 @@ public partial class ViewDetailsPage : ContentPage
 
         var dateLabel = new Label
         {
-            Text = DateTime.Parse(element.CreatedAt).ToString("dd/MM/yyyy"),
+            Text = (element.CreatedAt).ToString("dd/MM/yyyy"),
             FontSize = _frameDateLabelSize,
             HorizontalOptions = LayoutOptions.Center
         };
