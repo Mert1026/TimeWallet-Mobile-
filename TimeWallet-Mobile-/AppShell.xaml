@@ -8,19 +8,25 @@
     Shell.TabBarBackgroundColor="#0a5c41"
     Shell.TabBarForegroundColor="White">
 
+
+    <ShellContent
+
+        Title="Login"
+
+        ContentTemplate="{DataTemplate local:LoginPage}"
+
+        Route="Login" />
+
     <!-- ShellContent for LoginPage, outside of TabBar -->
     <TabBar>
-        <Tab Title="Home" Route="home">
-            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:NewPage1}"/>
+        <Tab Title="Settings" Icon="settings.svg" x:Name="SettingsPage">
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:SettingsPage}"/>
+        </Tab>
+        <Tab Title="Home" Icon="home.svg" x:Name="userMainTest">
+            <ShellContent Route="userMainTest" Title="Home" ContentTemplate="{DataTemplate local:UserMainPage_TEST}"/>
         </Tab>
         <Tab Title="Budgets" Icon="pigbank.png" Route="budgets">
             <ShellContent Title="Budgets" ContentTemplate="{DataTemplate local:NewPage2}"/>
-        </Tab>
-        <Tab Title="User" Route="user">
-            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:UserMainPage}"/>
-        </Tab>
-        <Tab Title="Test" Icon="home.svg" x:Name="userMainTest" Route="userMainTest">
-            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:UserMainPage_TEST}"/>
         </Tab>
     </TabBar>
 

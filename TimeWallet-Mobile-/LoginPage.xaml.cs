@@ -17,6 +17,7 @@ public partial class LoginPage : ContentPage
         _translations = new Translations(_language);
         SetText();
         Shell.SetNavBarIsVisible(this, false);
+        Shell.SetTabBarIsVisible(this, false);
         // CheckIfThereIsAlreadyLogedAccount();
     }
 
@@ -54,10 +55,10 @@ public partial class LoginPage : ContentPage
             {
                 await SecureStorage.SetAsync("UserEmail", txtEmail.Text);
                 await SecureStorage.SetAsync("UserName", user.User.Name);
-                
 
-                await Navigation.PushAsync(new NewPage1());
-                
+
+                await Shell.Current.GoToAsync("//userMainTest");
+
             }
 
         }
@@ -68,8 +69,8 @@ public partial class LoginPage : ContentPage
     private async void OnRegisterTapped(object sender, EventArgs e)
     {
         // Navigate to RegisterPage (make sure to create a RegisterPage.xaml)
-        //await Navigation.PushAsync(new RegisterPage());
         await Navigation.PushAsync(new RegisterPage());
+        //await Shell.Current.GoToAsync("//userMainTest");
     }
 
     private void Button_Clicked(object sender, EventArgs e)

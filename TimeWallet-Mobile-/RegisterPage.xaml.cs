@@ -43,13 +43,13 @@ public partial class RegisterPage : ContentPage
             PasswordHash = txtPassword.Text,
         };
 
-        //string message = await _apiService.RegisterUser(user);
+        string message = await _apiService.RegisterUserAsync(user);
         await Console.Out.WriteLineAsync();
 
     }
 
     private async void OnHaveAnAccount_Tapped(object sender, TappedEventArgs e)
     {
-        //await Navigation.PushAsync(new Login());
+        await Navigation.PushAsync(new LoginPage());
     }
 }

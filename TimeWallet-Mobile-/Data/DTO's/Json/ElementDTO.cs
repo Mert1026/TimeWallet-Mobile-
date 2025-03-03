@@ -12,8 +12,8 @@ namespace TimeWallet_Mobile_.Data.DTO_s.Json
         public string name { get; set; }
         public long createdAt { get; set; }
         public decimal amount { get; set; }
-        public string budgetId { get; set; }
+        public Guid budgetId { get; set; }
         //isValid() func - Приложи
-        public int? receiptId { get; set; }
+        public string? receiptId { get; set; }
     }
 }

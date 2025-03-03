@@ -24,7 +24,6 @@
                 <FlexLayout x:Name="BudgetLayout" Wrap="Wrap" JustifyContent="Center" />
             </ScrollView>
 
-            <Button x:Name="LOGIN" Clicked="LOGIN_Clicked" Text="Login"/>
 
         </VerticalStackLayout>
     </ScrollView>

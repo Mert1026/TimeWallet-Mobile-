@@ -20,7 +20,7 @@ namespace TimeWallet_Mobile_.Data.Models
         public decimal Amount { get; set; }
 
         [Required]
-        public int ReceiptId { get; set; }
+        public string ReceiptId { get; set; }
 
         [Required]
         [ForeignKey(nameof(ReceiptId))]

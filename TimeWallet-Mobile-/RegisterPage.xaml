@@ -14,7 +14,7 @@
              Opacity="0.2" VerticalOptions="End" HorizontalOptions="End"
              TranslationX="-40" TranslationY="-50"/>-->
 
-        <!-- Login Card -->
+        <!-- Register Card -->
         <Frame BackgroundColor="#e0f2d8"
            CornerRadius="10"
            Padding="20"
@@ -22,6 +22,13 @@
            HasShadow="True"
            VerticalOptions="Center"
            HorizontalOptions="Center">
+
+            <Frame.Shadow>
+                <Shadow Brush="Black"
+                    Opacity="0.5"
+                    Offset="10,10"
+                    Radius="10"/>
+            </Frame.Shadow>
 
             <StackLayout Spacing="25">
 

@@ -6,22 +6,28 @@
              BackgroundColor="#e1f3d8">
     <ScrollView>
         <VerticalStackLayout Padding="20">
-            <Frame x:Name="zoomFrame" BackgroundColor="#e1f3d8" WidthRequest="305" HeightRequest="55" HorizontalOptions="Center" CornerRadius="50" Padding="0" HasShadow="True">
-                <Frame.Shadow>
-                    <Shadow 
-                        Brush="Black" 
-                        Offset="9,00" 
-                        Radius="20" 
-                        Opacity="0.8" />
-                </Frame.Shadow>
-                <HorizontalStackLayout Padding="0" HorizontalOptions="Center">
-                    <Frame x:Name="levelOne_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
-                    <Frame x:Name="levelTwo_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
-                    <Frame x:Name="levelThree_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
-                    <Button x:Name="plus_Clicked" Text="+" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" Clicked="plusBtn_Clicked" FontAttributes="Bold" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
-                    <Button x:Name="minus_Clicked" Text="-" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" VerticalOptions="Center" HorizontalOptions="Center" Clicked="minusBtn_Clicked" FontFamily="Bold" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Frame x:Name="zoomFrame" BackgroundColor="#e1f3d8" WidthRequest="355" HeightRequest="55" HorizontalOptions="Center" CornerRadius="50" Padding="0" HasShadow="True">
+                    <Frame.Shadow>
+                        <Shadow 
+                            Brush="Black" 
+                            Offset="9,00" 
+                            Radius="20" 
+                            Opacity="0.8" />
+                    </Frame.Shadow>
+                    <HorizontalStackLayout Padding="0" HorizontalOptions="Center">
+                        <Frame x:Name="levelOne_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
+                        <Frame x:Name="levelTwo_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
+                        <Frame x:Name="levelThree_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
+                        <Button x:Name="minus_Clicked" Text="-" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" VerticalOptions="Center" HorizontalOptions="Center" Clicked="minusBtn_Clicked" FontFamily="Bold" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
+                        <Button x:Name="plus_Clicked" Text="+" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" Clicked="plusBtn_Clicked" FontAttributes="Bold" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
+                    </HorizontalStackLayout>
+                </Frame>
+                <HorizontalStackLayout Margin="5">
+                    <ImageButton x:Name="Refresh_btn" Source="refresh.svg" Clicked="Refresh_btn_Clicked" HeightRequest="40" WidthRequest="40" CornerRadius="40" BackgroundColor="Green"/>
                 </HorizontalStackLayout>
-            </Frame>
+            </HorizontalStackLayout>
+            
             <Grid ColumnDefinitions="*,*" Padding="10">
                 <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" >
                     <Label x:Name="budgeted_Sign" Text="Budgeted" FontAttributes="Bold" FontSize="16" TextColor="#15260d" HorizontalTextAlignment="Center"/>
@@ -40,7 +46,7 @@
             <ScrollView>
                 <FlexLayout x:Name="BudgetLayout" Wrap="Wrap" JustifyContent="Center" />
             </ScrollView>
-            <Button x:Name="LOGIN" Clicked="LOGIN_Clicked" Text="Login"/>
+        
 
             <Frame
     x:Name="budgetFrame"

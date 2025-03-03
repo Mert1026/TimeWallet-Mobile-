@@ -39,6 +39,14 @@
                             <Shadow Brush="Black" Offset="6,5" Radius="15" Opacity="0.75"/>
                         </Button.Shadow>
                     </Button>
+                    <BoxView 
+                        WidthRequest="2" 
+                        HeightRequest="50" 
+                        Color="Black" 
+                        VerticalOptions="Center" />
+                    <HorizontalStackLayout Margin="5" HorizontalOptions="End">
+                        <ImageButton x:Name="Refresh_btn" Source="refresh.svg" Clicked="Refresh_btn_Clicked" HeightRequest="40" WidthRequest="40" CornerRadius="40" BackgroundColor="Green"/>
+                    </HorizontalStackLayout>
                 </HorizontalStackLayout>
 
                 <!-- First Chart -->
@@ -74,12 +82,12 @@
             </StackLayout>
         </Frame>
         <HorizontalStackLayout HorizontalOptions="Center" Spacing="35">
-            <Button Text="Add Budget" FontSize="17" HeightRequest="100" WidthRequest="130" BackgroundColor="#0a5c41" TextColor="#e1f2d9" FontAttributes="Bold" Margin="0">
+            <Button Text="Add Budget" FontSize="17" HeightRequest="100" WidthRequest="130" BackgroundColor="#0a5c41" TextColor="#e1f2d9" FontAttributes="Bold" Margin="0" Clicked="Button_Clicked_2">
                 <Button.Shadow>
                     <Shadow Brush="Black" Offset="6,5" Radius="15" Opacity="0.75"/>
                 </Button.Shadow>
             </Button>
-            <Button Text="Add Element" FontSize="17" HeightRequest="100" WidthRequest="130" BackgroundColor="#0a5c41" TextColor="#e1f2d9" FontAttributes="Bold">
+            <Button Text="Add Element" FontSize="17" HeightRequest="100" WidthRequest="130" BackgroundColor="#0a5c41" TextColor="#e1f2d9" FontAttributes="Bold" Clicked="Button_Clicked_1">
                 <Button.Shadow>
                     <Shadow Brush="Black" Offset="6,5" Radius="15" Opacity="0.75"/>
                 </Button.Shadow>

@@ -25,7 +25,8 @@ namespace TimeWallet_Mobile_
         private async void SetStartupPage()
         {
 
-            string email = "";
+            //string email = await SecureStorage.GetAsync("UserEmail");
+            string email = "memo@gmail.com";
 
             if (string.IsNullOrEmpty(email))
             {

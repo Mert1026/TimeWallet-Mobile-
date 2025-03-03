@@ -23,7 +23,7 @@ public partial class NewPage2 : ContentPage
     private int _nameLabelSize = 25;
     private int _infoLabelsSize = 10;
     private int _progressBarHeight = 6;
-    private int _buttonTextSize = 18;
+    private int _buttonTextSize = 17;
     public NewPage2()
     {
         InitializeComponent();
@@ -55,7 +55,7 @@ public partial class NewPage2 : ContentPage
                 totalBudgeted += budget.Amount;
                 totalSpent += spent;
 
-                BudgetLayout.Children.Add(CreateBudgetBox(budget.Name, budget.Amount, spent));
+                BudgetLayout.Children.Add(CreateBudgetBox(budget.Id, budget.Amount, spent, budget.Name));
             }
 
             // Add total summary
@@ -68,8 +68,17 @@ public partial class NewPage2 : ContentPage
         }
     }
 
-    private Frame CreateBudgetBox(string name, decimal budgeted, decimal spent)
+    private Frame CreateBudgetBox(Guid budgetId, decimal budgeted, decimal spent, string name)
     {
+        string color = "#0a5d40";
+        if(budgeted - spent == 0)
+        {
+            color = "#ffb739";
+        }
+        else if(budgeted - spent < 0)
+        {
+            color = "f51e1e";
+        }
         return new Frame
         {
             WidthRequest = _framesWidth,
@@ -78,13 +87,18 @@ public partial class NewPage2 : ContentPage
             {
                 WidthRequest = _framesInnerWidth,
                 Children =
-        {
+                {
             new Label { Text = name, FontAttributes = FontAttributes.Bold, FontSize = _nameLabelSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromArgb("#0a5d40") },
             new Label { Text = $"US${budgeted:F2} Budgeted", FontSize = _infoLabelsSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromArgb("#0a5d40") },
-            new ProgressBar { Progress = (double)(spent / budgeted), HeightRequest = _progressBarHeight, BackgroundColor = Color.FromArgb("#c5e7b3"), ProgressColor = Color.FromArgb("#0a5d40") },
-            new Label { Text = $"US${spent:F2} spent | US${(budgeted - spent):F2} remaining", FontSize = _infoLabelsSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromArgb("#0a5d40") },
-            new Button { Text = "View Details", FontSize = _buttonTextSize, Command = new Command(() => ViewDetails(name)), BackgroundColor=Color.FromArgb("#0a5d40"), Margin=10, TextColor=Color.FromArgb("#e1f2d9") }
-        }
+            new ProgressBar { Progress = (double)(spent / budgeted), HeightRequest = _progressBarHeight, BackgroundColor = Color.FromArgb("#c5e7b3"), ProgressColor = Color.FromArgb(color) },
+            new Label { Text = $"US${spent:F2} spent | US${(budgeted - spent):F2} remaining", FontSize = _infoLabelsSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromArgb(color), FontAttributes=FontAttributes.Bold },
+            new HorizontalStackLayout
+            {
+                 new Button { Text = "Details", FontSize = _buttonTextSize, Command = new Command(() => ViewDetails(budgetId)), BackgroundColor=Color.FromArgb("#0a5d40"), Margin=5, TextColor=Color.FromArgb("#e1f2d9"), WidthRequest = 100 },
+                 new ImageButton {Source = "trash.svg",Command = new Command(() => DeleteBudget(budgetId)), BackgroundColor=Color.FromArgb("#f51e1e"), Margin=5, WidthRequest = 40, CornerRadius = 10}
+                
+            },
+                }
             },
             BorderColor = Color.FromArgb("#15260d"),
             Padding = 10,
@@ -106,9 +120,12 @@ public partial class NewPage2 : ContentPage
     }
 
 
-    private async void ViewDetails(string budgetName)
+    private async void ViewDetails(Guid budgetId)
     {
-        await Navigation.PushAsync(new ViewDetailsPage(_elements.Where(e => e.Budgets.Name == budgetName).ToList()));
+        var userBudgetResponse = await _apiService.GetInformationAboutUser(_userEmail);
+        var elements = JsonConvert.DeserializeObject<List<Elements>>(userBudgetResponse.elementJson);
+        _elements = elements;
+        await Navigation.PushAsync(new ViewDetailsPage(_elements.Where(e => e.BudgetId == budgetId).ToList()));
 
     }
 
@@ -117,7 +134,27 @@ public partial class NewPage2 : ContentPage
         await Navigation.PushAsync(new LoginPage());
     }
 
-    
+    private async void DeleteBudget(Guid budgetId)
+    {
+        string response = await _apiService.DeleteBudgetAsync(_userEmail, budgetId.ToString());
+        string userName = await SecureStorage.GetAsync("UserName");
+        if(response == $"User({userName}) doesn't own the provided budget!")
+        {
+            await DisplayAlert("Atention", "You don't own the provided budget!", "Ok");
+        }
+        else if(response == "Something went wrong, please try again.")
+        {
+            await DisplayAlert("Error", "Try again later.", "Ok");
+        }
+        else
+        {
+            await DisplayAlert("Success", "Budged deleted successfuly", "Ok");
+            BudgetLayout.Children.Clear();
+            LoadBudgets();
+        }
+    }
+
+
 
     private void UpdateSummaryFontsSizes(int labelsFontSizes)
     {
@@ -178,18 +215,8 @@ public partial class NewPage2 : ContentPage
         levelThree_frame.BackgroundColor = currentLevel >= 3 ? Color.FromArgb("#0a5c41") : Color.FromArgb("#e1f3d8");
     }
 
+    private void Refresh_btn_Clicked(object sender, EventArgs e)
+    {
+        OnAppearing();
+    }
 }
-
-
-
-//<VerticalStackLayout Grid.Column="0" HorizontalOptions= "Center" VerticalOptions= "Center" >
-//                < Label x:Name= "budgeted_Sign" Text= "Budgeted" FontAttributes= "Bold" FontSize= "16" TextColor= "Black" HorizontalTextAlignment= "Center" />
-//                < Label x:Name= "SummaryBudgeted" FontSize= "24" FontAttributes= "Bold" HorizontalTextAlignment= "Center" />
-//                < Label x:Name= "CurrentBalance_Sign_1" Text= "Current Balance" FontSize= "12" HorizontalTextAlignment= "Center" />
-//            </ VerticalStackLayout >
-
-//            < VerticalStackLayout Grid.Column= "1" HorizontalOptions= "Center" VerticalOptions= "Center" >
-//                < Label x:Name= "spent_Sign" Text= "Spent" FontAttributes= "Bold" FontSize= "16" HorizontalTextAlignment= "Center" />
-//                < Label x:Name= "SummarySpent" FontSize= "24" FontAttributes= "Bold" HorizontalTextAlignment= "Center" />
-//                < Label x:Name= "currentBalance_Sign_2" Text= "Current Balance" FontSize= "12" HorizontalTextAlignment= "Center" />
-//            </ VerticalStackLayout >

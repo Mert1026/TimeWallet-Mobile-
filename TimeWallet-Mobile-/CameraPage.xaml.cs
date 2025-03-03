@@ -8,6 +8,7 @@ using ZXing;
 using ZXing.Net.Maui;
 using ZXing.Net.Maui.Controls;
 
+
 namespace TimeWallet_Mobile_;
 
 public partial class CameraPage : ContentPage
@@ -15,6 +16,7 @@ public partial class CameraPage : ContentPage
     private bool isProcessingBarcode = false;
     private readonly ApiService _apiService = new ApiService();
     private bool isTorchOn = false;
+    private ScrollView _viewToDisplay;
     private VerticalStackLayout _optionsLayout;
     private List<Budgets> _userBudgets;
     
@@ -30,6 +32,7 @@ public partial class CameraPage : ContentPage
         InitializeComponent();
 
         _optionsLayout = new VerticalStackLayout();
+        _viewToDisplay = new ScrollView();
 
         BarcodeReader.Options = new ZXing.Net.Maui.BarcodeReaderOptions()
         {
@@ -48,7 +51,7 @@ public partial class CameraPage : ContentPage
         if (status != PermissionStatus.Granted)
         {
             await DisplayAlert("Error", "Camera permission is required to use this feature.", "OK");
-            return;
+            await Navigation.PopAsync();
         }
     }
 
@@ -86,6 +89,7 @@ public partial class CameraPage : ContentPage
 
         var userBudgetResponse = await _apiService.GetInformationAboutUser(await SecureStorage.GetAsync("UserEmail"));
         _userBudgets = JsonConvert.DeserializeObject<List<Budgets>>(userBudgetResponse.budgetJson);
+        string email = await SecureStorage.GetAsync("UserEmail");
 
         var first = e.Results?.FirstOrDefault();
 
@@ -95,7 +99,7 @@ public partial class CameraPage : ContentPage
             {
                 try
                 {
-                    List<string> parts = first.Value.Split('*').ToList();
+                    List<string> parts = first.Value.Split('*').ToList();                    
 
                     if (parts.Count >= 5)
                     {
@@ -108,6 +112,22 @@ public partial class CameraPage : ContentPage
 
                         await DisplayAlert("Barcode Detected", first.Value, "OK");
                         _receiptId = parts[1];
+                        ReceiptDTO receiptInfo = await _apiService.GetReceiptAsync(email, _receiptId);
+                        if(receiptInfo.Receipt == null)
+                        {
+                            await DisplayAlert("Atention", "There is no receipt in existence with the following parameters!", "Ok");
+                            await Navigation.PopAsync();
+                        }
+                        UserDTO userInfo = await _apiService.GetUserAsync(email);
+                        UsersReceiptsDTO receiptToAdd = new UsersReceiptsDTO()
+                        {
+                            id = receiptInfo.Receipt.id,
+                            ShopId = receiptInfo.Receipt.ShopId,
+                            ShopImage = receiptInfo.Receipt.ShopImage,
+                            DateTime = receiptInfo.Receipt.createdAt,
+                            TotalAmount = receiptInfo.Receipt.TotalAmount,
+                            UserId = userInfo.User.Id,
+                        };
                         ClearPage();
                     }
                     else
@@ -125,32 +145,6 @@ public partial class CameraPage : ContentPage
 
 
 
-    private async Task NextPageAsync(string receiptId, string storeId, string date, string time, string amount)
-    {
-        //if (Application.Current.MainPage is NavigationPage navPage)
-        //{
-        //    await navPage.PushAsync(new ReceiptInfoPage(receiptId, storeId, dateTime));
-        //}
-        //else
-        //{
-        //    await Application.Current.MainPage.DisplayAlert("Navigation Error", "NavigationPage is missing.", "OK");
-        //}
-        string email = await SecureStorage.GetAsync("UserEmail");
-
-        ReceiptDTO receiptInfo = await _apiService.GetReceiptAsync(email, _receiptId);
-
-        List<Elements> elements = new List<Elements>();
-        foreach(ReceiptItem item in receiptInfo.Items)
-        {
-            elements.Add(new Elements
-            {
-                Name = item.Name,
-                //BudgetId
-            });
-        }
-
-        //await Navigation.PushAsync();
-    }
 
     private async void goBack_Btn_Clicked(object sender, EventArgs e)
     {
@@ -183,15 +177,27 @@ public partial class CameraPage : ContentPage
         {
             layout.Children.Clear();
         }
+
+        Label MainText = new Label()
+        {
+            Text = "Select Budget:",
+            FontSize = 27,
+            FontAttributes = FontAttributes.Bold,
+            TextColor = Color.FromArgb("#0a5c41"),
+            Margin = 20,
+            HorizontalOptions = LayoutOptions.Center,
+        };
+        _optionsLayout.Children.Add(MainText);
+
         foreach (var item in _userBudgets)
         {
             Button button = new Button
             {
                 Text = item.Name,
-                TextColor = Colors.Black,
+                TextColor = Color.FromArgb("#e1f2d9"),
                 FontSize = 16,
-                BackgroundColor = Colors.LightGray,
-                Margin = new Thickness(5),
+                BackgroundColor = Color.FromArgb("#0a5c41"),
+                Margin = 10,
             };
 
             button.Clicked += (sender, e) => OnButtonClicked(item.Id); // Pass name to method
@@ -199,7 +205,8 @@ public partial class CameraPage : ContentPage
            _optionsLayout.Children.Add(button);
         }
         // Alternatively, set Content to an empty layout
-        Content = _optionsLayout;
+        _viewToDisplay.Content = _optionsLayout;
+        Content = _viewToDisplay;
         
     }
 
@@ -219,14 +226,18 @@ public partial class CameraPage : ContentPage
             {
                 id = Guid.NewGuid(),
                 name = item.Name,
-                budgetId = budgetId.ToString(),
+                budgetId = budgetId,
                 amount = item.Amount,
-                createdAt = long.Parse(item.Receipts.DateTime.ToString("MM/dd/yyyy")),
+                createdAt =((DateTimeOffset)item.Receipts.createdAt).ToUnixTimeMilliseconds(),
                 receiptId = receiptInfo.Receipt.id
             };
 
             await _apiService.AddElementAsync(element, email);
         }
+
+        await DisplayAlert("Success", "Expenses added.", "Ok");
+        await Navigation.PopAsync();
+
     }
 
 }

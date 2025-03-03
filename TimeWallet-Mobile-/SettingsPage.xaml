@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TimeWallet_Mobile_.SettingsPage"
+             Title="SettingsPage">
+    <Grid Padding="30"
+    VerticalOptions="Start"
+    HorizontalOptions="Center">
+
+        <!-- Settings Card -->
+        <Frame BackgroundColor="#e0f2d8"
+        CornerRadius="10"
+        Padding="20"
+        Margin="0"
+        WidthRequest="320"
+        HasShadow="True"
+        VerticalOptions="Center"
+        HorizontalOptions="Center">
+            <Frame.Shadow>
+                <Shadow Brush="Black"
+                Opacity="0.5"
+                Offset="10,10"
+                Radius="10"/>
+            </Frame.Shadow>
+
+            <StackLayout Spacing="25">
+
+                <!-- Name -->
+                <Label x:Name="MainText" Text="Settings" FontSize="35" FontAttributes="Bold" 
+                HorizontalOptions="Center" TextColor="Black"/>
+
+                <StackLayout Spacing="15">
+
+                    <!-- Name Input -->
+                    <HorizontalStackLayout Spacing="10">
+                        <Label x:Name="LangualeLabel" VerticalOptions="Center" Text="Language:" FontSize="18" TextColor="#0a5c41" FontAttributes="Bold"/>
+                        <Frame Padding="4" CornerRadius="10" BackgroundColor="#0a5c41">
+                            <Picker x:Name="LanuagePicker" HeightRequest="40" WidthRequest="100" Background="#0a5c41"
+                            SelectedIndexChanged="OnPickerSelectedIndexChanged"/>
+                        </Frame>
+                    </HorizontalStackLayout>
+
+                    <!-- Amount Input -->
+                    <HorizontalStackLayout Spacing="10">
+                        <Label x:Name="SwitchLabel" Text="Inactive" VerticalOptions="Center" TextColor="#0F4D36" FontAttributes="Bold"/>
+                        <Frame Padding="0" Margin="0" HeightRequest="40" WidthRequest="45" >
+                            <Switch x:Name="CustomSwitch" Toggled="Switch_Toggled" InputTransparent="False" WidthRequest="90" BackgroundColor="Aqua" HorizontalOptions="Center"/>
+                        </Frame>
+                        
+                    </HorizontalStackLayout>
+
+                    <!-- Add Button -->
+                    <Button x:Name="MainButtonLabel"
+                Text="Add"
+                BackgroundColor="#0F4D36"
+                TextColor="#e0f2d8"
+                FontSize="18"
+                CornerRadius="8"
+                Clicked="MainButtonLabel_Clicked"/>
+
+                </StackLayout>
+
+            </StackLayout>
+        </Frame>
+
+        <!-- Result Text -->
+        <StackLayout Orientation="Horizontal"
+            HorizontalOptions="Center">
+            <Label x:Name="txtResult"
+            Text=""
+            FontSize="21"
+            TextDecorations="Underline"
+            TextColor="#0a5d40"/>
+        </StackLayout>
+
+    </Grid>
+</ContentPage>

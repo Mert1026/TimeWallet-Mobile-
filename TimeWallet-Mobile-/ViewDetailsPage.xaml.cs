@@ -1,9 +1,12 @@
+using TimeWallet_Mobile_.Data.API_service;
 using TimeWallet_Mobile_.Data.Models;
 
 namespace TimeWallet_Mobile_;
 
 public partial class ViewDetailsPage : ContentPage
 {
+
+    private ApiService _apiService;
 
     private int _frameMaxWidth = 145;
     private int _frameMinWidth = 145;
@@ -13,42 +16,13 @@ public partial class ViewDetailsPage : ContentPage
     private int _frameBtnTextSize = 10;
     private int currentLevel = 1;
 
-    private List<Elements> elementsList = new List<Elements>
-        {
-            new Elements
-            {
-                id = Guid.NewGuid(),
-                BudgetId = Guid.NewGuid(),
-                Budgets = new Budgets { /* Initialize properties if necessary */ },
-                Name = "Groceries",
-                Amount = 150.75m,
-                CreatedAt = long.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")),
-                ReceiptId = 123
-
-            },
-            new Elements
-            {
-                id = Guid.NewGuid(),
-                BudgetId = Guid.NewGuid(),
-                Budgets = new Budgets { /* Initialize properties if necessary */ },
-                Name = "Rent",
-                Amount = 1200.00m,
-                CreatedAt = long.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
-            },
-            new Elements
-            {
-                id = Guid.NewGuid(),
-                BudgetId = Guid.NewGuid(),
-                Budgets = new Budgets { /* Initialize properties if necessary */ },
-                Name = "Entertainment",
-                Amount = 100.50m,
-                CreatedAt = long.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
-            }
-        };
+    private List<Elements> elementsList = new List<Elements>();
 
     public ViewDetailsPage(List<Elements> elements)
 	{
-		InitializeComponent();
+        _apiService = new ApiService();
+		elementsList.AddRange(elements);
+        InitializeComponent();
         GenerateElementsLayout(elementsList);
         UpdateFrameColors();
 
@@ -70,6 +44,7 @@ public partial class ViewDetailsPage : ContentPage
         var nameLabel = new Label
         {
             Text = element.Name,
+            TextColor=Color.FromArgb("#0a5d40"),
             FontSize = _frameNameSize,
             FontAttributes = FontAttributes.Bold,
             HorizontalOptions = LayoutOptions.Center
@@ -78,13 +53,15 @@ public partial class ViewDetailsPage : ContentPage
         var amountLabel = new Label
         {
             Text = $"US${element.Amount:F2}",
+            TextColor = Color.FromArgb("#0a5d40"),
             FontSize = _frameAmountLabesSize,
             HorizontalOptions = LayoutOptions.Center
         };
 
         var dateLabel = new Label
         {
-            Text = (element.CreatedAt).ToString("dd/MM/yyyy"),
+            Text = (DateTimeOffset.FromUnixTimeMilliseconds(element.CreatedAt).UtcDateTime).ToString("dd/MM/yyyy"),
+            TextColor = Color.FromArgb("#0a5d40"),
             FontSize = _frameDateLabelSize,
             HorizontalOptions = LayoutOptions.Center
         };
@@ -93,7 +70,7 @@ public partial class ViewDetailsPage : ContentPage
         {
             Text = "DELETE",
             FontSize = _frameBtnTextSize,
-            BackgroundColor = Colors.Red,
+            BackgroundColor = Color.FromArgb("f51e1e"),
             TextColor = Colors.White,
             HorizontalOptions = LayoutOptions.Center,
             Command = new Command(() => DeleteElement(element.id))
@@ -111,8 +88,8 @@ public partial class ViewDetailsPage : ContentPage
             {
                 Text = "Receipt",
                 FontSize = _frameBtnTextSize,
-                BackgroundColor = Colors.Green,
-                TextColor = Colors.White,
+                BackgroundColor = Color.FromArgb("#0a5c41"),
+                TextColor = Color.FromArgb("#e1f2d9"),
                 HorizontalOptions = LayoutOptions.Center,
                 Command = new Command(() => GoToReceipt(element.BudgetId))
             };
@@ -137,17 +114,27 @@ public partial class ViewDetailsPage : ContentPage
             MaximumWidthRequest = _frameMaxWidth,
             MinimumWidthRequest = _frameMinWidth,
             HorizontalOptions = LayoutOptions.Center,
+            HasShadow = true,
             Padding = 5,  // Reduced padding
             CornerRadius = 10,
             Margin = 5,    // Reduced margin
-            BackgroundColor = Colors.LightGray
+            BackgroundColor = Color.FromArgb("#e1f2d9"),
+            Shadow = new Shadow
+            {
+                Brush = Color.FromRgba(0, 0, 0, 0.4), // Shadow color (black with 40% opacity)
+                Offset = new Point(5, 5), // Shadow position offset (X, Y)
+                Radius = 20, // Blur radius of the shadow
+                Opacity = 1 // Shadow transparency
+            }
         };
     }
 
 
-    private void DeleteElement(Guid elementId)
+    private async void DeleteElement(Guid elementId)
     {
         Elements elToRemove = elementsList.FirstOrDefault(e => e.id == elementId);
+        string email = await SecureStorage.GetAsync("UserEmail");
+        await _apiService.DeleteElementAsync(email, elementId.ToString());
         elementsList.Remove(elToRemove);
         ElementsLayout.Children.Clear();
         GenerateElementsLayout(elementsList);
@@ -157,6 +144,7 @@ public partial class ViewDetailsPage : ContentPage
     private void GoToReceipt(Guid budgetId)
     {
         //Navigate to the receipt details page
+
     }
 
     private void plusBtn_Clicked(object sender, EventArgs e)
@@ -202,4 +190,8 @@ public partial class ViewDetailsPage : ContentPage
         levelThree_frame.BackgroundColor = currentLevel >= 3 ? Colors.Green : Colors.Gray;
     }
 
+    private void Refresh_btn_Clicked(object sender, EventArgs e)
+    {
+        OnAppearing();
+    }
 }

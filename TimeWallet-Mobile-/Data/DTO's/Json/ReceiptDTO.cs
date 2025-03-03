@@ -11,7 +11,7 @@ namespace TimeWallet_Mobile_.Data.DTO_s.Json
     public class ReceiptDTO
     {
         [JsonPropertyName("receipt")]
-        public Receipt Receipt { get; set; }
+        public Receipt? Receipt { get; set; }
 
         [JsonPropertyName("items")]
         public List<ReceiptItem> Items { get; set; }

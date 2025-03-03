@@ -19,6 +19,12 @@
            HasShadow="True"
            VerticalOptions="Center"
            HorizontalOptions="Center">
+            <Frame.Shadow>
+                <Shadow Brush="Black"
+                Opacity="0.5"
+                Offset="10,10"
+                Radius="10"/>
+            </Frame.Shadow>
 
             <StackLayout Spacing="25">
 
