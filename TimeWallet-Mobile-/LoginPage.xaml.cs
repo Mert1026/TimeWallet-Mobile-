@@ -45,7 +45,7 @@ public partial class LoginPage : ContentPage
             {
                 Email = txtEmail.Text,
                 Password = txtPassword.Text,
-                Username = user.User.Name,
+                Username = user.user.Name,
                 //TO DO
                 Remember = true
 
@@ -54,7 +54,11 @@ public partial class LoginPage : ContentPage
             if (message == "Login Successful.")
             {
                 await SecureStorage.SetAsync("UserEmail", txtEmail.Text);
-                await SecureStorage.SetAsync("UserName", user.User.Name);
+                await SecureStorage.SetAsync("UserName", user.user.Name);
+
+                //Preferences
+                await SecureStorage.SetAsync("theme", user.user.Theme);
+                await SecureStorage.SetAsync("language", user.user.Language);
 
 
                 await Shell.Current.GoToAsync("//userMainTest");

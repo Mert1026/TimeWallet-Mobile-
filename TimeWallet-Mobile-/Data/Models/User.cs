@@ -63,5 +63,11 @@ namespace TimeWallet_Mobile_.Data.Models
         [JsonPropertyName("lastLogin")]
         public DateTime LastLogin { get; set; }
 
+        [JsonPropertyName("theme")]
+        public string Theme { get; set; } = "light";
+
+        [JsonPropertyName("language")]
+        public string Language { get; set; } = "en";
+
     }
 }

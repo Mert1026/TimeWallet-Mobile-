@@ -71,7 +71,7 @@
                         TextColor="#e0f2d8"
                         FontSize="18"
                         CornerRadius="8"
-                        Clicked="OnRegisterClicked"
+                        Clicked="RegisterBtn_Clicked"
                         />
 
                     <StackLayout Orientation="Horizontal"

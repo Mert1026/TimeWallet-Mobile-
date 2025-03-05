@@ -3,6 +3,7 @@ using TimeWallet_Mobile_.Data.API_service;
 using TimeWallet_Mobile_.Data.Models;
 using TimeWallet_Mobile_.Data.DTO_s;
 using TimeWallet_Mobile_.Data.DTO_s.Json;
+using TimeWallet_Mobile_.Data.Translation;
 
 namespace TimeWallet_Mobile_;
 
@@ -12,10 +13,13 @@ public partial class AddElementPage : ContentPage
     public List<Budgets> _budgets = new List<Budgets>();
     private ApiService _apiService;
     private string _email;
+    private Translations _translations;
 	public AddElementPage()
 	{
         _apiService = new ApiService();
         InitializeComponent();
+        Shell.SetTabBarIsVisible(this, false);
+        ButtonsCalibration();
         BindingContext = this;
         GetUserEmail();
         AddBudgetsToPicker();
@@ -89,5 +93,62 @@ public partial class AddElementPage : ContentPage
             await Navigation.PopAsync();
         }
        
+    }
+
+    private async void ButtonsCalibration()
+    {
+        string theme = await SecureStorage.GetAsync("Theme");
+        if (theme == null)
+        {
+            await DisplayAlert("Atention", "Error", "Ok");
+        }
+        else if (theme == "light")
+        {
+            this.BackgroundColor = Color.FromArgb("#e0f2d8");
+        }
+        else
+        {
+            this.BackgroundColor = Color.FromArgb("#a9d494");
+        }
+
+        string language = await SecureStorage.GetAsync("language");
+
+        if (language == null)
+        {
+            await DisplayAlert("Atention", "Error occured! Try again later.", "Ok");
+            await Navigation.PopAsync();
+        }
+        else if (language == "en")
+        {
+            _translations = new Translations("en");
+        }
+        else
+        {
+            _translations = new Translations("bg");
+        }
+        SetText();
+    }
+
+    private void SetText()
+    {
+        MainText.Text = _translations.ExpensePageMainText;
+        NameLabel.Text = _translations.ExpensePageName;
+        txtName.Placeholder = _translations.ExpensePageName;
+        AmountLabel.Text = _translations.ExpensePageAmount;
+        txtAmount.Placeholder = _translations.ExpensePageAmount;
+        BudgetLabel.Text = _translations.ExpensePageBudgetSelect;
+        MainButton.Text = _translations.ExpensePageAddBtn;
+
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        ButtonsCalibration();
+        // Refresh data when the page appears
+    }
+
+    private async void goBack_Btn_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
     }
 }

@@ -2,8 +2,8 @@
 using Newtonsoft.Json;
 using TimeWallet_Mobile_.Data.Models;
 using Microsoft.Maui.Graphics.Text;
-using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
+using TimeWallet_Mobile_.Data.Translation;
 
 namespace TimeWallet_Mobile_;
 
@@ -14,20 +14,24 @@ public partial class NewPage2 : ContentPage
     private List<Elements> _elements = new List<Elements>();
     private int currentLevel = 1;
 
+    private Translations _translations;
+
     private int _labelsFontsSizes = 8;
 
 
     private int _framesWidth = 210;
     private int _framesInnerWidth = 160;
-    private int _framesHeight = 160;
+    private int _framesHeight = 150;
     private int _nameLabelSize = 25;
     private int _infoLabelsSize = 10;
     private int _progressBarHeight = 6;
     private int _buttonTextSize = 17;
+    private int _buttonsDimensions = 40;
     public NewPage2()
     {
         InitializeComponent();
         _apiService = new ApiService();
+        ButtonsCalibration();
         double screenWidth = DeviceDisplay.MainDisplayInfo.Width / DeviceDisplay.MainDisplayInfo.Density;
         double targetWidth = screenWidth * 0.75;
         UpdateFrameColors();
@@ -36,9 +40,10 @@ public partial class NewPage2 : ContentPage
 
     private async void LoadBudgets()
     {
+        _userEmail = await SecureStorage.GetAsync("UserEmail");
         try
         {
-            _userEmail = await SecureStorage.GetAsync("userEmail");
+            _userEmail = await SecureStorage.GetAsync("UserEmail");
             var userBudgetResponse = await _apiService.GetInformationAboutUser(_userEmail);
             var budgets = JsonConvert.DeserializeObject<List<Budgets>>(userBudgetResponse.budgetJson);
             var elements = JsonConvert.DeserializeObject<List<Elements>>(userBudgetResponse.elementJson);
@@ -94,8 +99,8 @@ public partial class NewPage2 : ContentPage
             new Label { Text = $"US${spent:F2} spent | US${(budgeted - spent):F2} remaining", FontSize = _infoLabelsSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromArgb(color), FontAttributes=FontAttributes.Bold },
             new HorizontalStackLayout
             {
-                 new Button { Text = "Details", FontSize = _buttonTextSize, Command = new Command(() => ViewDetails(budgetId)), BackgroundColor=Color.FromArgb("#0a5d40"), Margin=5, TextColor=Color.FromArgb("#e1f2d9"), WidthRequest = 100 },
-                 new ImageButton {Source = "trash.svg",Command = new Command(() => DeleteBudget(budgetId)), BackgroundColor=Color.FromArgb("#f51e1e"), Margin=5, WidthRequest = 40, CornerRadius = 10}
+                 new Button { Text = "Details", FontSize = _buttonTextSize+3, Command = new Command(() => ViewDetails(budgetId)), BackgroundColor=Color.FromArgb("#0a5d40"), Margin=5, Padding=0, TextColor=Color.FromArgb("#e1f2d9"), WidthRequest = _buttonsDimensions+60, HeightRequest = _buttonsDimensions},
+                 new ImageButton {Source = "trash.svg",Command = new Command(() => DeleteBudget(budgetId)), BackgroundColor=Color.FromArgb("#f51e1e"), Margin=5, Padding=5, WidthRequest = _buttonsDimensions, CornerRadius = 10, HeightRequest = _buttonsDimensions}
                 
             },
                 }
@@ -108,7 +113,7 @@ public partial class NewPage2 : ContentPage
             HasShadow= true,
             Margin = 10,
 
-            // 👇 Adding Shadow
+            //Adding Shadow
             Shadow = new Shadow
             {
                 Brush = Color.FromRgba(0, 0, 0, 0.4), // Shadow color (black with 40% opacity)
@@ -184,6 +189,7 @@ public partial class NewPage2 : ContentPage
             _nameLabelSize += 3;
             _buttonTextSize += 3;
             _progressBarHeight += 1;
+            _buttonsDimensions += 15;
             LoadBudgets();
         }
     }
@@ -204,6 +210,7 @@ public partial class NewPage2 : ContentPage
             _nameLabelSize -= 3;
             _buttonTextSize -= 3;
             _progressBarHeight -= 1;
+            _buttonsDimensions -= 15;
             LoadBudgets();
         }
     }
@@ -218,5 +225,51 @@ public partial class NewPage2 : ContentPage
     private void Refresh_btn_Clicked(object sender, EventArgs e)
     {
         OnAppearing();
+        LoadBudgets();
+    }
+
+    private async void ButtonsCalibration()
+    {
+        string theme = await SecureStorage.GetAsync("Theme");
+        if (theme == null)
+        {
+            await DisplayAlert("Atention", "Error", "Ok");
+        }
+        else if (theme == "light")
+        {
+            this.BackgroundColor = Color.FromArgb("#e0f2d8");
+        }
+        else
+        {
+            this.BackgroundColor = Color.FromArgb("#a9d494");
+        }
+
+        string language = await SecureStorage.GetAsync("language");
+
+        if (language == null)
+        {
+            await DisplayAlert("Atention", "Error occured! Try again later.", "Ok");
+            await Navigation.PopAsync();
+        }
+        else if (language == "en")
+        {
+            _translations = new Translations("en");
+        }
+        else
+        {
+            _translations = new Translations("bg");
+        }
+        SetText();
+    }
+
+    private void SetText()
+    {
+
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        ButtonsCalibration();
+        // Refresh data when the page appears
     }
 }

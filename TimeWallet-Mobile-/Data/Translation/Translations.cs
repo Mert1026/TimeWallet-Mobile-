@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,13 +24,36 @@ namespace TimeWallet_Mobile_.Data.Translation
         public string BudgetsButtonText { get; set; }
         
 
-        //Expenses/ElementsPage
+        //ExpensesPage
+        public string ExpensePageMainText { get; set; }
+        public string ExpensePageName {  get; set; }
+        public string ExpensePageAmount { get; set; }
+        public string ExpensePageBudgetSelect {  get; set; }
+        public string ExpensePageAddBtn { get; set; }
+
+
+        //BudgetsPage
+        public string BudgetsPageMainText { get; set; }
+        public string BudgetsPageName { get; set; }
+        public string BudgetsPageAmount { get; set; }
+        public string BudgetsPageAddBtn { get; set; }
+
 
         //MainPage
-        public string MainPageExpensesText { get; set; }
-        public string mainPageBudgetButtonText { get; set; }
+        public string MainPageMainText { get; set; }
+        public string MainPageBudgetButtonText { get; set; }
         public string MainPageElementButtonText {  get; set; }  
         public string MainPageCameraButtonText {  get; set; }
+
+        //SettingsPage
+
+        public string SettingsMainText { get; set; }
+        public string UserSettingsMainText { get; set; }
+        public string LanguageLabelText { get; set; }
+        public string ThemeLabelText { get; set; }
+        public string UserNameLabelText { get; set; }
+        public string UserEmailLabelText {  get; set; }
+        public string SettingsPageSaveBtnText { get; set; }
 
         public Translations(string language) 
         {
@@ -45,6 +69,30 @@ namespace TimeWallet_Mobile_.Data.Translation
             BudgetsThirdlyText_Two = "Remaining";
             BudgetsButtonText = "View Details";
 
+            SettingsMainText = "Settings";
+            UserSettingsMainText = "Profile Settings";
+            LanguageLabelText = "Language";
+            ThemeLabelText = "Theme";
+            UserNameLabelText = "User Name";
+            UserEmailLabelText = "Email";
+            SettingsPageSaveBtnText = "Save";
+
+            MainPageMainText = "Last Expenses";
+            MainPageBudgetButtonText = "Add Budget";
+            MainPageElementButtonText = "Add Expense";
+            MainPageCameraButtonText = "Camera";
+
+            ExpensePageAddBtn = "Add Expense";
+            ExpensePageAmount = "Amount";
+            ExpensePageBudgetSelect = "Select Budget:";
+            ExpensePageMainText = "Add Expense";
+            ExpensePageName = "Name";
+
+            BudgetsPageAddBtn = "Add Budget";
+            BudgetsPageAmount = "Amount";
+            BudgetsPageMainText = "Add Budget";
+            BudgetsPageName = "Name";
+
             if (language == "bg")
             {
                 LoginPageMainText = "Вход";
@@ -57,6 +105,30 @@ namespace TimeWallet_Mobile_.Data.Translation
                 BudgetsThirdlyText_One = "Изхарчено";
                 BudgetsThirdlyText_Two = "Оставащо";
                 BudgetsButtonText = "Детайли";
+
+                SettingsMainText = "Настройки";
+                UserSettingsMainText = "Профил";
+                LanguageLabelText = "Език";
+                ThemeLabelText = "Тема";
+                UserNameLabelText = "Име";
+                UserEmailLabelText = "Имейл";
+                SettingsPageSaveBtnText = "Запамети";
+
+                MainPageMainText = "Скорошни разходи";
+                MainPageBudgetButtonText = "Добави Бюджет";
+                MainPageElementButtonText = "Добави Разход";
+                MainPageCameraButtonText = "Камера";
+
+                ExpensePageAddBtn = "Добави";
+                ExpensePageAmount = "Стойност";
+                ExpensePageBudgetSelect = "Избери бюджет:";
+                ExpensePageMainText = "Добави разход";
+                ExpensePageName = "Име";
+
+                BudgetsPageAddBtn = "Добави Бюджет";
+                BudgetsPageAmount = "Стойност";
+                BudgetsPageMainText = "Добави Бюджет";
+                BudgetsPageName = "Име";
             }
         }
 

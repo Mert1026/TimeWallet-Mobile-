@@ -6,24 +6,25 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace TimeWallet_Mobile_.Data.Models
 {
     public class Receipt
     {
-        [Key]
-        [Required]
+        [JsonPropertyName("id")]
         public string id { get; set; }
 
-        [Required]
+        [JsonPropertyName("shopId")]
         public string ShopId { get; set; }
 
-        [Required]
-        public byte[] ShopImage { get; set; }
-        [Required]
+        [JsonPropertyName("shopImage")]
+        public string ShopImage { get; set; }
+
+        [JsonPropertyName("createdAt")]
         public DateTime createdAt { get; set; }
 
-        [Required]
+        [JsonPropertyName("totalAmount")]
         public double TotalAmount { get; set; }
 
     }

@@ -19,12 +19,12 @@
                 
                 <!-- Frame for the label -->
                 <Frame BackgroundColor="#0a5c41" CornerRadius="25" HeightRequest="50" Padding="0">
-                    <Label Text="Last Expenses" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" TextColor="#e1f2d9"
+                    <Label x:Name="MainTextLabel" Text="Last Expenses" HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" TextColor="#e1f2d9"
                            FontSize="23"/>
                 </Frame>
 
                 <HorizontalStackLayout Padding="10" Spacing="10" HorizontalOptions="CenterAndExpand">
-                    <Button x:Name="donutChart_btn" HeightRequest="45" WidthRequest="45" CornerRadius="50" Padding="10" Clicked="donutChart_btn_Clicked"  ImageSource="donutchart.svg" BackgroundColor="#0a5c41">
+                    <Button x:Name="donutChart_btn" HeightRequest="45" WidthRequest="45" CornerRadius="50" Padding="5" Clicked="donutChart_btn_Clicked"  ImageSource="donutchart.svg" BackgroundColor="#0a5c41">
                         <Button.Shadow>
                             <Shadow Brush="Black" Offset="6,5" Radius="15" Opacity="0.75"/>
                         </Button.Shadow>
@@ -82,18 +82,18 @@
             </StackLayout>
         </Frame>
         <HorizontalStackLayout HorizontalOptions="Center" Spacing="35">
-            <Button Text="Add Budget" FontSize="17" HeightRequest="100" WidthRequest="130" BackgroundColor="#0a5c41" TextColor="#e1f2d9" FontAttributes="Bold" Margin="0" Clicked="Button_Clicked_2">
+            <Button x:Name="AddBudgetBtn" Text="Add Budget" FontSize="17" HeightRequest="100" WidthRequest="130" BackgroundColor="#0a5c41" TextColor="#e1f2d9" FontAttributes="Bold" Margin="0" Clicked="Button_Clicked_2" LineBreakMode="WordWrap">
                 <Button.Shadow>
                     <Shadow Brush="Black" Offset="6,5" Radius="15" Opacity="0.75"/>
                 </Button.Shadow>
             </Button>
-            <Button Text="Add Element" FontSize="17" HeightRequest="100" WidthRequest="130" BackgroundColor="#0a5c41" TextColor="#e1f2d9" FontAttributes="Bold" Clicked="Button_Clicked_1">
+            <Button x:Name="AddExpenseBtn" Text="Add Expense" FontSize="17" HeightRequest="100" WidthRequest="130" BackgroundColor="#0a5c41" TextColor="#e1f2d9" FontAttributes="Bold" Clicked="Button_Clicked_1" LineBreakMode="WordWrap">
                 <Button.Shadow>
                     <Shadow Brush="Black" Offset="6,5" Radius="15" Opacity="0.75"/>
                 </Button.Shadow>
             </Button>
         </HorizontalStackLayout>
-        <Button Text="Camera" WidthRequest="295" Margin="25" Clicked="Button_Clicked" BackgroundColor="#0a5c41" TextColor="#e1f2d9" FontAttributes="Bold">
+        <Button x:Name="CameraBtn" Text="Camera" WidthRequest="295" Margin="25" Clicked="Button_Clicked" BackgroundColor="#0a5c41" TextColor="#e1f2d9" FontAttributes="Bold">
             <Button.Shadow>
                 <Shadow Brush="Black" Offset="6,5" Radius="15" Opacity="0.75"/>
             </Button.Shadow>

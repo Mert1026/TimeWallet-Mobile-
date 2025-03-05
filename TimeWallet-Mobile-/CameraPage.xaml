@@ -22,9 +22,9 @@
             BarcodesDetected="BarcodeReader_BarcodesDetected"/>
         </Frame>
 
-        <HorizontalStackLayout HeightRequest="80">
-            <Button x:Name="goBack_Btn" Clicked="goBack_Btn_Clicked" HeightRequest="50" WidthRequest="80" ImageSource="arrowleft.svg" BackgroundColor="#0a5c41"></Button>
-            <Button x:Name="FlashLight_Btn" Clicked="FlashLight_Btn_Clicked" Margin="65" HeightRequest="80" WidthRequest="80" CornerRadius="80" ImageSource="torchoff.svg" Padding="0" BackgroundColor="#0a5c41">
+        <HorizontalStackLayout HeightRequest="100" WidthRequest="390" VerticalOptions="End" HorizontalOptions="Center" Spacing="45">
+            <Button x:Name="goBack_Btn" Clicked="goBack_Btn_Clicked" HeightRequest="50" WidthRequest="80" ImageSource="arrowleft.svg" BackgroundColor="#0a5c41" VerticalOptions="End" HorizontalOptions="Start"></Button>
+            <Button x:Name="FlashLight_Btn" Clicked="FlashLight_Btn_Clicked" HeightRequest="80" WidthRequest="80" Margin="30" CornerRadius="80" ImageSource="torchoff.svg" Padding="0" BackgroundColor="#0a5c41" VerticalOptions="Start" HorizontalOptions="Start">
                 <Button.Shadow>
                     <Shadow Brush="Black" Offset="6,5" Radius="15" Opacity="0.75"/>
                 </Button.Shadow>

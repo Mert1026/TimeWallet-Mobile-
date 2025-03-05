@@ -1,5 +1,6 @@
-using TimeWallet_Mobile_.Data.API_service;
+﻿using TimeWallet_Mobile_.Data.API_service;
 using TimeWallet_Mobile_.Data.Models;
+using TimeWallet_Mobile_.Data.Translation;
 
 namespace TimeWallet_Mobile_;
 
@@ -7,6 +8,7 @@ public partial class ViewDetailsPage : ContentPage
 {
 
     private ApiService _apiService;
+    private Translations _translations;
 
     private int _frameMaxWidth = 145;
     private int _frameMinWidth = 145;
@@ -25,6 +27,7 @@ public partial class ViewDetailsPage : ContentPage
         InitializeComponent();
         GenerateElementsLayout(elementsList);
         UpdateFrameColors();
+        Shell.SetTabBarIsVisible(this, false);
 
     }
 
@@ -84,24 +87,7 @@ public partial class ViewDetailsPage : ContentPage
 
         if (fromReceipt)
         {
-            var goToReceiptButton = new Button
-            {
-                Text = "Receipt",
-                FontSize = _frameBtnTextSize,
-                BackgroundColor = Color.FromArgb("#0a5c41"),
-                TextColor = Color.FromArgb("#e1f2d9"),
-                HorizontalOptions = LayoutOptions.Center,
-                Command = new Command(() => GoToReceipt(element.BudgetId))
-            };
-
-            var buttonsLayout = new HorizontalStackLayout
-            {
-                Children = { deleteButton, goToReceiptButton },
-                HorizontalOptions = LayoutOptions.Center,
-                Spacing = 5 // Add a small spacing between buttons
-            };
-
-            layout.Children.Add(buttonsLayout);
+            nameLabel.Text = $"{nameLabel.Text} - 🧾";
         }
         else
         {
@@ -185,13 +171,64 @@ public partial class ViewDetailsPage : ContentPage
 
     private void UpdateFrameColors()
     {
-        levelOne_frame.BackgroundColor = currentLevel >= 1 ? Colors.Green : Colors.Gray;
-        levelTwo_frame.BackgroundColor = currentLevel >= 2 ? Colors.Green : Colors.Gray;
-        levelThree_frame.BackgroundColor = currentLevel >= 3 ? Colors.Green : Colors.Gray;
+        levelOne_frame.BackgroundColor = currentLevel >= 1 ? Color.FromArgb("#0a5c41") : Color.FromArgb("#e1f3d8");
+        levelTwo_frame.BackgroundColor = currentLevel >= 2 ? Color.FromArgb("#0a5c41") : Color.FromArgb("#e1f3d8");
+        levelThree_frame.BackgroundColor = currentLevel >= 3 ? Color.FromArgb("#0a5c41") : Color.FromArgb("#e1f3d8");
     }
 
     private void Refresh_btn_Clicked(object sender, EventArgs e)
     {
         OnAppearing();
+        GenerateElementsLayout(elementsList);
+    }
+
+    private async void ButtonsCalibration()
+    {
+        string theme = await SecureStorage.GetAsync("Theme");
+        if (theme == null)
+        {
+            await DisplayAlert("Atention", "Error", "Ok");
+        }
+        else if (theme == "light")
+        {
+            this.BackgroundColor = Color.FromArgb("#e0f2d8");
+        }
+        else
+        {
+            this.BackgroundColor = Color.FromArgb("#a9d494");
+        }
+
+        string language = await SecureStorage.GetAsync("language");
+
+        if (language == null)
+        {
+            await DisplayAlert("Atention", "Error occured! Try again later.", "Ok");
+            await Navigation.PopAsync();
+        }
+        else if (language == "en")
+        {
+            _translations = new Translations("en");
+        }
+        else
+        {
+            _translations = new Translations("bg");
+        }
+        SetText();
+    }
+
+    private void SetText()
+    {
+
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        ButtonsCalibration();
+        // Refresh data when the page appears
+    }
+
+    private async void goBack_Btn_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
     }
 }

@@ -7,7 +7,7 @@
     <ScrollView>
         <VerticalStackLayout Padding="20">
             <HorizontalStackLayout HorizontalOptions="Center">
-                <Frame x:Name="zoomFrame" BackgroundColor="#e1f3d8" WidthRequest="355" HeightRequest="55" HorizontalOptions="Center" CornerRadius="50" Padding="0" HasShadow="True">
+                <Frame x:Name="zoomFrame" BackgroundColor="#e1f3d8" WidthRequest="285" HeightRequest="55" HorizontalOptions="Center" CornerRadius="50" Padding="0" HasShadow="True">
                     <Frame.Shadow>
                         <Shadow 
                             Brush="Black" 

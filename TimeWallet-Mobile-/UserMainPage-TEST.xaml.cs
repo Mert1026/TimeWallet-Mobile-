@@ -1,9 +1,11 @@
 using Microcharts;
 using Microcharts.Maui;
 using SkiaSharp;
+using System.Xml;
 using System.Xml.Serialization;
 using TimeWallet_Mobile_.Data.API_service;
 using TimeWallet_Mobile_.Data.Models;
+using TimeWallet_Mobile_.Data.Translation;
 
 namespace TimeWallet_Mobile_;
 
@@ -15,6 +17,7 @@ public partial class UserMainPage_TEST : ContentPage
 
     private ChartEntry[] _entries;
     private List<ChartEntry> _currentEntries;
+    private Translations _translations;
 	    
 	public UserMainPage_TEST()
 	{
@@ -22,6 +25,7 @@ public partial class UserMainPage_TEST : ContentPage
         //Shell.SetTabBarIsVisible(this, true);
         _apiService = new ApiService();
         AddEntries();
+        ButtonsCalibration();
 
 	}
 
@@ -191,5 +195,56 @@ public partial class UserMainPage_TEST : ContentPage
     private void Refresh_btn_Clicked(object sender, EventArgs e)
     {
         OnAppearing();
+        AddEntries();
+        ButtonsCalibration();
+    }
+
+    private async void ButtonsCalibration()
+    {
+        string theme = await SecureStorage.GetAsync("Theme");
+        if (theme == null)
+        {
+            await DisplayAlert("Atention", "Error", "Ok");
+        }
+        else if (theme == "light")
+        {
+            this.BackgroundColor = Color.FromArgb("#e0f2d8");
+        }
+        else
+        {
+            this.BackgroundColor = Color.FromArgb("#a9d494");
+        }
+
+        string language = await SecureStorage.GetAsync("language");
+
+        if (language == null)
+        {
+            await DisplayAlert("Atention", "Error occured! Try again later.", "Ok");
+            await Navigation.PopAsync();
+        }
+        else if (language == "en")
+        {
+            _translations = new Translations("en");
+        }
+        else
+        {
+            _translations = new Translations("bg");
+        }
+        SetText();
+    }
+
+    private void SetText()
+    {
+        MainTextLabel.Text = _translations.MainPageMainText;
+        AddBudgetBtn.Text = _translations.MainPageBudgetButtonText;
+        AddExpenseBtn.Text = _translations.MainPageElementButtonText;
+        CameraBtn.Text = _translations.MainPageCameraButtonText;
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        AddEntries();
+        ButtonsCalibration();
+        // Refresh data when the page appears
     }
 }

@@ -66,6 +66,8 @@
 	  <None Remove="Resources\Images\piggybank.svg" />
 	  <None Remove="Resources\Images\refresh.svg" />
 	  <None Remove="Resources\Images\settings.svg" />
+	  <None Remove="Resources\Images\sun.svg" />
+	  <None Remove="Resources\Images\sunandcloud.svg" />
 	  <None Remove="Resources\Images\torchoff.svg" />
 	  <None Remove="Resources\Images\torchon.svg" />
 	  <None Remove="Resources\Images\trash.svg" />

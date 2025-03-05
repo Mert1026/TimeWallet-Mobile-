@@ -11,6 +11,6 @@ namespace TimeWallet_Mobile_.Data.DTO_s.Json
     public class UserDTO
     {
         [JsonPropertyName("user")]
-        public Models.User User { get; set; }
+        public Models.User user { get; set; }
     }
 }

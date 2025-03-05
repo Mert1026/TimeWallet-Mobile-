@@ -22,15 +22,19 @@ namespace TimeWallet_Mobile_.Data.API_service
         public ApiService()
         {
             _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:5173/api/timewallet/");
-            //_httpClient.BaseAddress = new Uri("https://timewallet.azurewebsites.net/api/timewallet/");
+            //_httpClient.BaseAddress = new Uri("https://localhost:5173/api/timewallet/");
+            _httpClient.BaseAddress = new Uri("https://timewallet.azurewebsites.net/api/timewallet/");
         }
+
+        
+
 
         public async Task<UserBudgetResponseDTO> GetInformationAboutUser(string email)
         {
             try
             {
-                var response = await _httpClient.GetAsync($"getInformationAboutUser/{email}");
+                string encodedEmail = Uri.EscapeDataString(email);
+                var response = await _httpClient.GetAsync($"getInformationAboutUser/{encodedEmail}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -108,6 +112,35 @@ namespace TimeWallet_Mobile_.Data.API_service
                 return $"Exception: {ex.Message}";
             }
         }
+
+        public async Task<string> RegisterUser(UserDTO userDTO)
+        {
+            try
+            {
+                var json = JsonConvert.SerializeObject(userDTO);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PostAsync("register", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var messageRAW = await response.Content.ReadAsStringAsync();
+                    var responseData = JsonConvert.DeserializeObject<dynamic>(messageRAW);
+
+                    string successMessage = responseData.message;
+                    return successMessage;
+                }
+                else
+                {
+                    return $"Error: {await response.Content.ReadAsStringAsync()}";
+                }
+            }
+            catch (Exception ex)
+            {
+                return $"Exception: {ex.Message}";
+            }
+        }
+
 
 
         public async Task<string> LoginUser(LoginModelDTO login)
@@ -211,7 +244,7 @@ namespace TimeWallet_Mobile_.Data.API_service
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonResponse = await response.Content.ReadAsStringAsync();
-                    var receiptResponse = JsonConvert.DeserializeObject<ReceiptDTO>(jsonResponse);
+                    var receiptResponse = System.Text.Json.JsonSerializer.Deserialize<ReceiptDTO>(jsonResponse);
                     return receiptResponse;
                 }
                 if(message == "Receipt not found.")
@@ -401,12 +434,47 @@ namespace TimeWallet_Mobile_.Data.API_service
             }
         }
 
+        public async Task<string> UpdateUserAsync(string email, string userName, string newEmail, string language, string theme)
+        {
+            try
+            {
+                // Create the request body as a JSON object
+                var updateUserDTO = new
+                {
+                    UserName = userName,
+                    NewEmail = newEmail,
+                    Theme = theme,
+                    Language = language
+                };
 
+                // Serialize the object to JSON
+                var json = JsonConvert.SerializeObject(updateUserDTO);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
+                // Make the POST request to the API endpoint
+                var response = await _httpClient.PostAsync($"updateUser/{email}", content);
 
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the success message from the response
+                    var messageRAW = await response.Content.ReadAsStringAsync();
+                    var responseData = JsonConvert.DeserializeObject<dynamic>(messageRAW);
 
+                    string successMessage = responseData.message;
+                    return successMessage;
+                }
+                else
+                {
+                    // Return error message if the response is not successful
+                    return $"Error: {await response.Content.ReadAsStringAsync()}";
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle and return any exceptions that occur
+                return $"Exception: {ex.Message}";
+            }
+        }
 
     }
-
-
 }

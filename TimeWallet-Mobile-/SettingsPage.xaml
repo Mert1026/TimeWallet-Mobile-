@@ -2,8 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TimeWallet_Mobile_.SettingsPage"
-             Title="SettingsPage">
-    <Grid Padding="30"
+             Title="SettingsPage"
+             BackgroundColor="#d1e3ca">
+    <VerticalStackLayout Padding="30"
+          HeightRequest="620"
     VerticalOptions="Start"
     HorizontalOptions="Center">
 
@@ -14,7 +16,7 @@
         Margin="0"
         WidthRequest="320"
         HasShadow="True"
-        VerticalOptions="Center"
+        VerticalOptions="Start"
         HorizontalOptions="Center">
             <Frame.Shadow>
                 <Shadow Brush="Black"
@@ -31,47 +33,99 @@
 
                 <StackLayout Spacing="15">
 
-                    <!-- Name Input -->
+                    <!-- Language Input -->
                     <HorizontalStackLayout Spacing="10">
-                        <Label x:Name="LangualeLabel" VerticalOptions="Center" Text="Language:" FontSize="18" TextColor="#0a5c41" FontAttributes="Bold"/>
+                        <Label x:Name="LangualeLabel" VerticalOptions="Center" Text="Language:" FontSize="21" TextColor="#0a5c41" FontAttributes="Bold"/>
                         <Frame Padding="4" CornerRadius="10" BackgroundColor="#0a5c41">
-                            <Picker x:Name="LanuagePicker" HeightRequest="40" WidthRequest="100" Background="#0a5c41"
-                            SelectedIndexChanged="OnPickerSelectedIndexChanged"/>
+                            <Picker x:Name="LanguagePicker" HeightRequest="40" WidthRequest="100" Background="#0a5c41"
+                            SelectedIndexChanged="LanuagePicker_SelectedIndexChanged"/>
                         </Frame>
                     </HorizontalStackLayout>
 
-                    <!-- Amount Input -->
+                    <!-- Theme Input -->
                     <HorizontalStackLayout Spacing="10">
-                        <Label x:Name="SwitchLabel" Text="Inactive" VerticalOptions="Center" TextColor="#0F4D36" FontAttributes="Bold"/>
-                        <Frame Padding="0" Margin="0" HeightRequest="40" WidthRequest="45" >
-                            <Switch x:Name="CustomSwitch" Toggled="Switch_Toggled" InputTransparent="False" WidthRequest="90" BackgroundColor="Aqua" HorizontalOptions="Center"/>
-                        </Frame>
-                        
+                        <Label x:Name="ThemeLabel" Text="Theme:" FontSize="21" TextColor="#0a5c41" FontAttributes="Bold" VerticalOptions="Center" />
+                        <Border StrokeThickness="0" BackgroundColor="Transparent">
+                            <Border.Shadow>
+                                <Shadow Brush="Black" Opacity="0.5" Offset="5,5" Radius="10"/>
+                            </Border.Shadow>
+                            <ImageButton x:Name="ThemeBtn"
+                                 Source="sun.svg"
+                                 BackgroundColor="#0a5c41"
+                                 HeightRequest="40"
+                                 WidthRequest="40"
+                                 CornerRadius="10"
+                                 VerticalOptions="Center"
+                                 Clicked="ThemeBtn_Clicked"
+                                         Padding="5"/>
+                        </Border>
                     </HorizontalStackLayout>
 
-                    <!-- Add Button -->
-                    <Button x:Name="MainButtonLabel"
-                Text="Add"
-                BackgroundColor="#0F4D36"
-                TextColor="#e0f2d8"
-                FontSize="18"
-                CornerRadius="8"
-                Clicked="MainButtonLabel_Clicked"/>
+
 
                 </StackLayout>
 
             </StackLayout>
         </Frame>
+        <Frame BackgroundColor="#e0f2d8"
+                CornerRadius="10"
+                Padding="20"
+                Margin="10"
+                WidthRequest="320"
+                HasShadow="True"
+                VerticalOptions="End"
+                HorizontalOptions="Center">
+            <Frame.Shadow>
+                <Shadow Brush="Black"
+                    Opacity="0.5"
+                    Offset="10,10"
+                    Radius="10"/>
+            </Frame.Shadow>
 
-        <!-- Result Text -->
-        <StackLayout Orientation="Horizontal"
-            HorizontalOptions="Center">
-            <Label x:Name="txtResult"
-            Text=""
-            FontSize="21"
-            TextDecorations="Underline"
-            TextColor="#0a5d40"/>
-        </StackLayout>
+            <StackLayout Spacing="25">
 
-    </Grid>
+                <!-- Name -->
+                <Label x:Name="MainText_2" Text="Profile Settings" FontSize="35" FontAttributes="Bold" 
+                HorizontalOptions="Center" TextColor="Black"/>
+
+                <StackLayout Spacing="15">
+
+                    <!-- Name Input -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label x:Name="NameLabel" VerticalOptions="Center" Text="User name:" FontSize="21" TextColor="#0a5c41" FontAttributes="Bold"/>
+                        <Entry x:Name="UserNameEntry" BackgroundColor="White" TextColor="Black"></Entry>
+                    </VerticalStackLayout>
+
+                    <!-- Amount Input -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label x:Name="EmailLabel" Text="Email:" FontSize="21" TextColor="#0a5c41" FontAttributes="Bold" VerticalOptions="Center"/>
+                        <Entry x:Name="EmailEntry" BackgroundColor="White" TextColor="Black"></Entry>
+                    </VerticalStackLayout>
+
+                    <Button x:Name="SaveBtn"
+                        Text="Save"
+                        BackgroundColor="#0F4D36"
+                        TextColor="#e0f2d8"
+                        FontSize="18"
+                        CornerRadius="8"
+                        Clicked="SaveBtn_Clicked"
+                    VerticalOptions="End"/>
+
+
+
+                </StackLayout>
+                
+                
+
+            </StackLayout>
+            
+            
+        </Frame>
+
+
+
+
+    </VerticalStackLayout>
+
+
 </ContentPage>

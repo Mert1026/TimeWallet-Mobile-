@@ -18,15 +18,15 @@ namespace TimeWallet_Mobile_
             NavigationPage.SetHasBackButton(new NewPage1(), false);
 
             // Navigate to Profile page on startup
-            //SetStartupPage();
+            SetStartupPage();
 
         }
 
         private async void SetStartupPage()
         {
 
-            //string email = await SecureStorage.GetAsync("UserEmail");
-            string email = "memo@gmail.com";
+            string email = await SecureStorage.GetAsync("UserEmail");
+            //string email = "memo@gmail.com";
 
             if (string.IsNullOrEmpty(email))
             {

@@ -4,81 +4,89 @@
              x:Class="TimeWallet_Mobile_.AddElementPage"
              Title="AddElementPage"
              BackgroundColor="#e1f2d9">
-    <Grid Padding="30"
+
+    <VerticalStackLayout VerticalOptions="Center">
+        <Grid Padding="30"
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+
+
+
+            <!-- Element Card -->
+            <Frame BackgroundColor="#e0f2d8"
+    CornerRadius="10"
+    Padding="20"
+    Margin="0"
+    WidthRequest="320"
+    HasShadow="True"
     VerticalOptions="Center"
     HorizontalOptions="Center">
+                <Frame.Shadow>
+                    <Shadow Brush="Black"
+            Opacity="0.5"
+            Offset="10,10"
+            Radius="10"/>
+                </Frame.Shadow>
+
+                <StackLayout Spacing="25">
+
+                    <!-- Name -->
+                    <Label x:Name="MainText" Text="Add Expense" FontSize="35" FontAttributes="Bold" 
+           HorizontalOptions="Center" TextColor="Black"/>
+
+                    <StackLayout Spacing="15">
+
+                        <!-- Name Input -->
+                        <StackLayout>
+                            <Label x:Name="NameLabel" Text="Name" FontSize="16" TextColor="Black"/>
+                            <Entry x:Name="txtName" Placeholder="Name"
+                Keyboard="Text" BackgroundColor="#F7F7F7"
+                TextColor="Black"/>
+                        </StackLayout>
+
+                        <!-- Amount Input -->
+                        <StackLayout>
+                            <Label x:Name="AmountLabel" Text="Amount" FontSize="16" TextColor="Black"/>
+                            <Entry x:Name="txtAmount" Placeholder="Amount"
+                Keyboard="Numeric" BackgroundColor="#F7F7F7"
+                TextColor="Black"/>
+                        </StackLayout>
+
+                        <!-- Budget Input -->
+                        <Label x:Name="BudgetLabel" Text="Select Budget:" FontSize="16" TextColor="Black"/>
+                        <Frame Padding="4" CornerRadius="10" BackgroundColor="#0a5c41">
+                            <Picker x:Name="BudgetsPicker" WidthRequest="250" Background="#0a5c41"
+                    SelectedIndexChanged="OnPickerSelectedIndexChanged"/>
+                        </Frame>
 
 
+                        <!-- Add Button -->
+                        <Button x:Name="MainButton"
+                Text="Add"
+                BackgroundColor="#0F4D36"
+                TextColor="#e0f2d8"
+                FontSize="18"
+                CornerRadius="8"
+                Clicked="MainButtonLabel_Clicked"/>
 
-        <!-- Element Card -->
-        <Frame BackgroundColor="#e0f2d8"
-        CornerRadius="10"
-        Padding="20"
-        Margin="0"
-        WidthRequest="320"
-        HasShadow="True"
-        VerticalOptions="Center"
-        HorizontalOptions="Center">
-            <Frame.Shadow>
-                <Shadow Brush="Black"
-                Opacity="0.5"
-                Offset="10,10"
-                Radius="10"/>
-            </Frame.Shadow>
-
-            <StackLayout Spacing="25">
-
-                <!-- Name -->
-                <Label x:Name="MainText" Text="Add Expense" FontSize="35" FontAttributes="Bold" 
-               HorizontalOptions="Center" TextColor="Black"/>
-
-                <StackLayout Spacing="15">
-
-                    <!-- Name Input -->
-                    <StackLayout>
-                        <Label x:Name="NameLabel" Text="Name" FontSize="16" TextColor="Black"/>
-                        <Entry x:Name="txtName" Placeholder="Name"
-                    Keyboard="Text" BackgroundColor="#F7F7F7"
-                    TextColor="Black"/>
                     </StackLayout>
-
-                    <!-- Amount Input -->
-                    <StackLayout>
-                        <Label x:Name="AmountLabel" Text="Amount" FontSize="16" TextColor="Black"/>
-                        <Entry x:Name="txtAmount" Placeholder="Amount"
-                    IsPassword="True" BackgroundColor="#F7F7F7"
-                    TextColor="Black"/>
-                    </StackLayout>
-
-                    <Frame Padding="4" CornerRadius="10" BackgroundColor="#0a5c41">
-                        <Picker x:Name="BudgetsPicker" WidthRequest="250" Background="#0a5c41"
-                        SelectedIndexChanged="OnPickerSelectedIndexChanged"/>
-                    </Frame>
-
-
-                    <!-- Add Button -->
-                    <Button x:Name="MainButtonLabel"
-                    Text="Add"
-                    BackgroundColor="#0F4D36"
-                    TextColor="#e0f2d8"
-                    FontSize="18"
-                    CornerRadius="8"
-                    Clicked="MainButtonLabel_Clicked"/>
 
                 </StackLayout>
+            </Frame>
 
+            <!-- Result Text -->
+            <StackLayout Orientation="Horizontal"
+         HorizontalOptions="Center">
+                <Label x:Name="txtResult"
+       Text=""
+       FontSize="21"
+       TextDecorations="Underline"
+       TextColor="#0a5d40"/>
             </StackLayout>
-        </Frame>
 
-        <!-- Result Text -->
-        <StackLayout Orientation="Horizontal"
-             HorizontalOptions="Center">
-            <Label x:Name="txtResult"
-           Text=""
-           FontSize="21"
-           TextDecorations="Underline"
-           TextColor="#0a5d40"/>
-        </StackLayout>
-
-    </Grid>
+        </Grid>
+        <Button x:Name="goBack_Btn" Clicked="goBack_Btn_Clicked" HeightRequest="50" WidthRequest="80" ImageSource="arrowleft.svg" BackgroundColor="#0a5c41" VerticalOptions="End" HorizontalOptions="Start"></Button>
+    </VerticalStackLayout>
+    
+    
 </ContentPage>
