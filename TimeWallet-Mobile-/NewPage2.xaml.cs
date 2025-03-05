@@ -69,7 +69,7 @@ public partial class NewPage2 : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", ex.Message, "OK");
+            await DisplayAlert(_translations.Error, ex.Message, _translations.OkText);
         }
     }
 
@@ -94,12 +94,12 @@ public partial class NewPage2 : ContentPage
                 Children =
                 {
             new Label { Text = name, FontAttributes = FontAttributes.Bold, FontSize = _nameLabelSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromArgb("#0a5d40") },
-            new Label { Text = $"US${budgeted:F2} Budgeted", FontSize = _infoLabelsSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromArgb("#0a5d40") },
+            new Label { Text = $"US${budgeted:F2} {_translations.BudgetsSecondarytext}", FontSize = _infoLabelsSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromArgb("#0a5d40") },
             new ProgressBar { Progress = (double)(spent / budgeted), HeightRequest = _progressBarHeight, BackgroundColor = Color.FromArgb("#c5e7b3"), ProgressColor = Color.FromArgb(color) },
-            new Label { Text = $"US${spent:F2} spent | US${(budgeted - spent):F2} remaining", FontSize = _infoLabelsSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromArgb(color), FontAttributes=FontAttributes.Bold },
+            new Label { Text = $"US${spent:F2} {_translations.BudgetsThirdlyText_One} | US${(budgeted - spent):F2} {_translations.BudgetsThirdlyText_Two}", FontSize = _infoLabelsSize, HorizontalOptions = LayoutOptions.Center, TextColor = Color.FromArgb(color), FontAttributes=FontAttributes.Bold },
             new HorizontalStackLayout
             {
-                 new Button { Text = "Details", FontSize = _buttonTextSize+3, Command = new Command(() => ViewDetails(budgetId)), BackgroundColor=Color.FromArgb("#0a5d40"), Margin=5, Padding=0, TextColor=Color.FromArgb("#e1f2d9"), WidthRequest = _buttonsDimensions+60, HeightRequest = _buttonsDimensions},
+                 new Button { Text = $"{_translations.BudgetsButtonText}", FontSize = _buttonTextSize+3, Command = new Command(() => ViewDetails(budgetId)), BackgroundColor=Color.FromArgb("#0a5d40"), Margin=5, Padding=0, TextColor=Color.FromArgb("#e1f2d9"), WidthRequest = _buttonsDimensions+60, HeightRequest = _buttonsDimensions},
                  new ImageButton {Source = "trash.svg",Command = new Command(() => DeleteBudget(budgetId)), BackgroundColor=Color.FromArgb("#f51e1e"), Margin=5, Padding=5, WidthRequest = _buttonsDimensions, CornerRadius = 10, HeightRequest = _buttonsDimensions}
                 
             },
@@ -130,7 +130,7 @@ public partial class NewPage2 : ContentPage
         var userBudgetResponse = await _apiService.GetInformationAboutUser(_userEmail);
         var elements = JsonConvert.DeserializeObject<List<Elements>>(userBudgetResponse.elementJson);
         _elements = elements;
-        await Navigation.PushAsync(new ViewDetailsPage(_elements.Where(e => e.BudgetId == budgetId).ToList()));
+        await Navigation.PushAsync(new ViewDetailsPage(_elements.Where(e => e.BudgetId == budgetId).ToList(), budgetId));
 
     }
 
@@ -143,17 +143,17 @@ public partial class NewPage2 : ContentPage
     {
         string response = await _apiService.DeleteBudgetAsync(_userEmail, budgetId.ToString());
         string userName = await SecureStorage.GetAsync("UserName");
-        if(response == $"User({userName}) doesn't own the provided budget!")
+        if (response == $"User({userName}) doesn't own the provided budget!")
         {
-            await DisplayAlert("Atention", "You don't own the provided budget!", "Ok");
+            await DisplayAlert(_translations.Atention, _translations.DontOwnBudget, _translations.OkText);
         }
-        else if(response == "Something went wrong, please try again.")
+        else if (response == "Something went wrong, please try again.")
         {
-            await DisplayAlert("Error", "Try again later.", "Ok");
+            await DisplayAlert(_translations.Atention, _translations.Error, _translations.OkText);
         }
         else
         {
-            await DisplayAlert("Success", "Budged deleted successfuly", "Ok");
+            await DisplayAlert(_translations.Success, _translations.SuccessDeletedBudged, _translations.OkText);
             BudgetLayout.Children.Clear();
             LoadBudgets();
         }
@@ -233,14 +233,26 @@ public partial class NewPage2 : ContentPage
         string theme = await SecureStorage.GetAsync("Theme");
         if (theme == null)
         {
-            await DisplayAlert("Atention", "Error", "Ok");
+            await DisplayAlert(_translations.Atention, _translations.Error, _translations.OkText);
         }
         else if (theme == "light")
         {
+            Microsoft.Maui.Controls.Application.Current.Resources["Primary"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDark"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDarkText"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["Secondary"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["SecondaryDarkText"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["Tertiary"] = Color.FromHex("#e0f2d8");
             this.BackgroundColor = Color.FromArgb("#e0f2d8");
         }
         else
         {
+            Microsoft.Maui.Controls.Application.Current.Resources["Primary"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDark"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDarkText"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["Secondary"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["SecondaryDarkText"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["Tertiary"] = Color.FromHex("#a9d494");
             this.BackgroundColor = Color.FromArgb("#a9d494");
         }
 
@@ -248,10 +260,10 @@ public partial class NewPage2 : ContentPage
 
         if (language == null)
         {
-            await DisplayAlert("Atention", "Error occured! Try again later.", "Ok");
+            await DisplayAlert(_translations.Atention, _translations.Error, _translations.OkText);
             await Navigation.PopAsync();
         }
-        else if (language == "en")
+        else if (language == "English")
         {
             _translations = new Translations("en");
         }
@@ -264,12 +276,16 @@ public partial class NewPage2 : ContentPage
 
     private void SetText()
     {
-
+        spent_Sign.Text = _translations.BudgetsThirdlyText_One;
+        budgeted_Sign.Text = _translations.BudgetsSecondarytext;
+        currentBalance_Sign_1.Text = _translations.BudgetsCurrentBalance;
+        currentBalance_Sign_2.Text = _translations.BudgetsCurrentBalance;
     }
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        BudgetLayout.Children.Clear();
         ButtonsCalibration();
-        // Refresh data when the page appears
+        LoadBudgets();
     }
 }

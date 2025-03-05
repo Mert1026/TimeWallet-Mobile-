@@ -15,14 +15,16 @@ public partial class LoginPage : ContentPage
     {
         InitializeComponent();
         _translations = new Translations(_language);
-        SetText();
+        SetLanguage();
         Shell.SetNavBarIsVisible(this, false);
         Shell.SetTabBarIsVisible(this, false);
+        SetText();
         // CheckIfThereIsAlreadyLogedAccount();
     }
 
     private void SetText()
     {
+        SetLanguage();  
         MainTextLabel.Text = _translations.LoginPageMainText;
         EmailLabel.Text = _translations.LoginPageEmailText;
         PasswordLabel.Text = _translations.LoginPagePasswordText;
@@ -77,15 +79,16 @@ public partial class LoginPage : ContentPage
         //await Shell.Current.GoToAsync("//userMainTest");
     }
 
-    private void Button_Clicked(object sender, EventArgs e)
+    private async void SetLanguage()
     {
-        if(_language == "bg")
+        string language = await SecureStorage.GetAsync("language");
+        if(language == "bg")
         {
-            _language = "en";
+            _language = "bg";
         }
         else
         {
-            _language = "bg";
+            _language = "en";
         }
         
         _translations = new Translations(_language);
@@ -95,6 +98,7 @@ public partial class LoginPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        SetLanguage();
         SetText();  // Update text when the page appears
     }
 

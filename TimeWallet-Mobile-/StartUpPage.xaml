@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TimeWallet_Mobile_.StartUpPage"
+             Title="StartUpPage"
+             BackgroundColor="#e1f2d9">
+    <VerticalStackLayout>
+        <Frame Padding="5" BackgroundColor="#0a5c41" BorderColor="#0a5c41" VerticalOptions="Start" CornerRadius="0">
+            <Label FontFamily="Poppins-Medium" Text="TimeWallet" FontSize="17" TextColor="#e1f2d9" HorizontalOptions="Center" FontAttributes="Bold"></Label>
+        </Frame>
+        <VerticalStackLayout Margin="10" Spacing="10">
+            <VerticalStackLayout Spacing="15">
+                <Frame BackgroundColor="#0a5c41" CornerRadius="30" HasShadow="True">
+                    <Frame.Shadow>
+                        <Shadow Brush="Black"
+                     Offset="5,5"
+                    Opacity="0.4"
+                    Radius="35"/>
+                    </Frame.Shadow>
+                    <VerticalStackLayout Spacing="10">
+                        <Frame BorderColor="Transparent" BackgroundColor="#e1f2d9" HasShadow="True" Padding="10" CornerRadius="25">
+                            <Label FontFamily="Poppins-Medium" x:Name="MainTextLabel" Text="Welcome to, TimeWallet" TextColor="#0a5c41" HorizontalOptions="Center" FontSize="20" FontAttributes="Bold" HeightRequest="27"></Label>
+                        </Frame>
+                        <Frame Padding="0" CornerRadius="30" BorderColor="Transparent" HasShadow="False">
+
+                            <Image Source="startupimage.png"/>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="45">
+                    <Button x:Name="LoginBtn" FontFamily="Poppins-Medium" Text="Login" FontSize="21" FontAttributes="Bold" Clicked="Button_Clicked" BackgroundColor="#0a5c41" TextColor="#e1f2d9" WidthRequest="130" HeightRequest="50"/>
+                    <Button x:Name="RegisterBtn" FontFamily="Poppins-Medium" Text="Register" FontSize="21" FontAttributes="Bold" Clicked="Button_Clicked_1" BackgroundColor="#0a5c41" TextColor="#e1f2d9" WidthRequest="160" HeightRequest="50"/>
+                </HorizontalStackLayout>
+
+                <VerticalStackLayout HorizontalOptions="Center">
+                    <Frame BackgroundColor="#0a5c41" Padding="5">
+                        <Frame BackgroundColor="#e1f2d9" Padding="5">
+                            <VerticalStackLayout Spacing="3">
+                                <Label x:Name="LanguagePickLabel" Text="Pick language:" HorizontalOptions="Center" TextColor="#0a5c41" FontAttributes="Bold" FontSize="15"></Label>
+                                <VerticalStackLayout>
+                                    <Frame Padding="0" BackgroundColor="#0a5c41">
+                                        <VerticalStackLayout>
+                                            <VerticalStackLayout BackgroundColor="#e1f2d9">
+                                                <Picker x:Name="LanguagePicker" FontFamily="Poppins-Medium"
+                                            Title="Choose language:"
+                                            SelectedIndexChanged="LanguagePicker_SelectedIndexChanged"
+                                            SelectedIndex="0"
+                                            BackgroundColor="#0a5c41">
+                                                    <Picker.Items>
+                                                        <x:String>English</x:String>
+                                                        <x:String>Български</x:String>
+                                                    </Picker.Items>
+                                                </Picker>
+                                            </VerticalStackLayout>
+                                        </VerticalStackLayout>
+                                    </Frame>
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+
+                        </Frame>
+                    </Frame>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+
+            <Frame Padding="5" VerticalOptions="End" CornerRadius="15" BackgroundColor="#0a5c41" WidthRequest="360">
+                <VerticalStackLayout Spacing="2">
+                    <Label FontFamily="Poppins-Medium" x:Name="VisitLabel" Text="Visit our website too!" TextColor="#e1f2d9" HorizontalOptions="Center" FontSize="15" FontAttributes="Bold"></Label>
+                    <BoxView BackgroundColor="#e1f2d9" HeightRequest="2" WidthRequest="210"></BoxView>
+
+                    <Frame Padding="5" BackgroundColor="#e1f2d9" HeightRequest="65" WidthRequest="65" CornerRadius="75" HorizontalOptions="Center">
+                        <ImageButton Source="twicon.svg" HeightRequest="55" WidthRequest="55" BackgroundColor="#0a5c41" Padding="5" CornerRadius="55" HorizontalOptions="Center" Clicked="ImageButton_Clicked">
+
+                        </ImageButton>
+                    </Frame>
+
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+    
+</ContentPage>

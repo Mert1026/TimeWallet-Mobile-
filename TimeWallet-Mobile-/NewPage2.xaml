@@ -19,26 +19,26 @@
                         <Frame x:Name="levelOne_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
                         <Frame x:Name="levelTwo_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
                         <Frame x:Name="levelThree_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="50" Margin="3"></Frame>
-                        <Button x:Name="minus_Clicked" Text="-" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" VerticalOptions="Center" HorizontalOptions="Center" Clicked="minusBtn_Clicked" FontFamily="Bold" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
-                        <Button x:Name="plus_Clicked" Text="+" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" Clicked="plusBtn_Clicked" FontAttributes="Bold" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
+                        <Button FontFamily="Poppins-Medium" x:Name="minus_Clicked" Text="-" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" VerticalOptions="Center" HorizontalOptions="Center" Clicked="minusBtn_Clicked" TextColor="#e1f3d8" FontAttributes="Bold" BackgroundColor="#0a5c41"></Button>
+                        <Button FontFamily="Poppins-Medium" x:Name="plus_Clicked" Text="+" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" Clicked="plusBtn_Clicked" FontAttributes="Bold" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
                     </HorizontalStackLayout>
                 </Frame>
                 <HorizontalStackLayout Margin="5">
                     <ImageButton x:Name="Refresh_btn" Source="refresh.svg" Clicked="Refresh_btn_Clicked" HeightRequest="40" WidthRequest="40" CornerRadius="40" BackgroundColor="Green"/>
                 </HorizontalStackLayout>
             </HorizontalStackLayout>
-            
+
             <Grid ColumnDefinitions="*,*" Padding="10">
                 <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" >
-                    <Label x:Name="budgeted_Sign" Text="Budgeted" FontAttributes="Bold" FontSize="16" TextColor="#15260d" HorizontalTextAlignment="Center"/>
-                    <Label x:Name="SummaryBudgeted" FontSize="24" FontAttributes="Bold" TextColor="#15260d" HorizontalTextAlignment="Center"/>
-                    <Label x:Name="currentBalance_Sign_1" Text="Current Balance" FontSize="12" TextColor="#15260d" HorizontalTextAlignment="Center"/>
+                    <Label FontFamily="Poppins-Medium" x:Name="budgeted_Sign" Text="Budgeted" FontAttributes="Bold" FontSize="16" TextColor="#15260d" HorizontalTextAlignment="Center"/>
+                    <Label FontFamily="Poppins-Medium" x:Name="SummaryBudgeted" FontSize="24" FontAttributes="Bold" TextColor="#15260d" HorizontalTextAlignment="Center"/>
+                    <Label FontFamily="Poppins-Medium" x:Name="currentBalance_Sign_1" Text="Current Balance" FontSize="12" TextColor="#15260d" HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Label x:Name="spent_Sign" Text="Spent" FontAttributes="Bold" FontSize="16" TextColor="#15260d" HorizontalTextAlignment="Center" />
-                    <Label x:Name="SummarySpent" FontSize="24" FontAttributes="Bold" TextColor="#15260d" HorizontalTextAlignment="Center" />
-                    <Label x:Name="currentBalance_Sign_2" Text="Current Balance" FontSize="12" TextColor="#15260d" HorizontalTextAlignment="Center" />
+                    <Label FontFamily="Poppins-Medium" x:Name="spent_Sign" Text="Spent" FontAttributes="Bold" FontSize="16" TextColor="#15260d" HorizontalTextAlignment="Center" />
+                    <Label FontFamily="Poppins-Medium" x:Name="SummarySpent" FontSize="24" FontAttributes="Bold" TextColor="#15260d" HorizontalTextAlignment="Center" />
+                    <Label FontFamily="Poppins-Medium" x:Name="currentBalance_Sign_2" Text="Current Balance" FontSize="12" TextColor="#15260d" HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
 
             </Grid>
@@ -46,55 +46,6 @@
             <ScrollView>
                 <FlexLayout x:Name="BudgetLayout" Wrap="Wrap" JustifyContent="Center" />
             </ScrollView>
-        
-
-            <Frame
-    x:Name="budgetFrame"
-    WidthRequest="250"
-    BorderColor="#0a5c41"
-    Padding="10"
-    CornerRadius="10"
-    BackgroundColor="#e1f3d8"
-    HeightRequest="180"
-    Margin="10">
-
-                <VerticalStackLayout WidthRequest="250">
-                    <Label
-            Text="BIG"
-            FontAttributes="Bold"
-            FontSize="30"
-            HorizontalOptions="Center"
-            TextColor="#0a5d40" />
-
-                    <Label
-            Text="US$TEST.OO Budgeted"
-            FontSize="14"
-            HorizontalOptions="Center"
-            TextColor="#0a5d40" />
-
-                    <ProgressBar
-            Progress="0.5"
-            HeightRequest="5"
-            BackgroundColor="#c5e7b3"
-            ProgressColor="#0a5d40" />
-
-                    <Label
-            Text="TEST"
-            FontSize="20"
-            HorizontalOptions="Center"
-            TextColor="#0a5d40" />
-
-                    <Button
-            Text="View Details"
-                        HeightRequest="50"
-                        WidthRequest="230"
-                        Margin="10"
-            FontSize="23"
-            BackgroundColor="#0a5d40"
-            TextColor="White" />
-                </VerticalStackLayout>
-            </Frame>
-
 
         </VerticalStackLayout>
     </ScrollView>

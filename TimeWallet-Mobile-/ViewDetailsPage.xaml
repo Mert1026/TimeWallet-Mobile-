@@ -4,43 +4,43 @@
              x:Class="TimeWallet_Mobile_.ViewDetailsPage"
              Title="ViewDetailsPage"
              BackgroundColor="#e1f2d9">
-    
-    <VerticalStackLayout HorizontalOptions="Center" Padding="10">
-        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-            <Button x:Name="goBack_Btn" Clicked="goBack_Btn_Clicked" HeightRequest="40" WidthRequest="40" ImageSource="arrowleft.svg" BackgroundColor="#0a5c41" VerticalOptions="Center" HorizontalOptions="Start" Margin="0" Padding="8"></Button>
-            <Frame x:Name="zoomFrame" BackgroundColor="#e1f3d8" WidthRequest="250" HeightRequest="55" HorizontalOptions="Center" CornerRadius="50" Padding="0" HasShadow="True">
-                <Frame.Shadow>
-                    <Shadow 
-                Brush="Black" 
-                Offset="9,00" 
-                Radius="20" 
-                Opacity="0.8" />
-                </Frame.Shadow>
-                
-                <HorizontalStackLayout Padding="0" HorizontalOptions="Center">
-                    <Frame x:Name="levelOne_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="40" Margin="3"></Frame>
-                    <Frame x:Name="levelTwo_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="40" Margin="3"></Frame>
-                    <Frame x:Name="levelThree_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="40" Margin="3"></Frame>
-                    <Button x:Name="minus_Clicked" Text="-" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" VerticalOptions="Center" HorizontalOptions="Center" Clicked="minusBtn_Clicked" FontFamily="Bold" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
-                    <Button x:Name="plus_Clicked" Text="+" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" Clicked="plusBtn_Clicked" FontAttributes="Bold" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
+    <ScrollView>
+        <VerticalStackLayout HorizontalOptions="Center" Padding="10">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Button x:Name="goBack_Btn" Clicked="goBack_Btn_Clicked" HeightRequest="40" WidthRequest="40" ImageSource="arrowleft.svg" BackgroundColor="#0a5c41" VerticalOptions="Center" HorizontalOptions="Start" Margin="0" Padding="8"></Button>
+                <Frame x:Name="zoomFrame" BackgroundColor="#e1f3d8" WidthRequest="250" HeightRequest="55" HorizontalOptions="Center" CornerRadius="50" Padding="0" HasShadow="True">
+                    <Frame.Shadow>
+                        <Shadow 
+                        Brush="Black" 
+                        Offset="9,00" 
+                        Radius="20" 
+                        Opacity="0.8" />
+                    </Frame.Shadow>
+
+                    <HorizontalStackLayout Padding="0" HorizontalOptions="Center">
+                        <Frame x:Name="levelOne_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="40" Margin="3"></Frame>
+                        <Frame x:Name="levelTwo_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="40" Margin="3"></Frame>
+                        <Frame x:Name="levelThree_frame" BackgroundColor="#0a5c41" HeightRequest="5" WidthRequest="40" Margin="3"></Frame>
+                        <Button FontFamily="Poppins-Medium" x:Name="minus_Clicked" Text="-" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" VerticalOptions="Center" HorizontalOptions="Center" Clicked="minusBtn_Clicked" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
+                        <Button FontFamily="Poppins-Medium" x:Name="plus_Clicked" Text="+" HeightRequest="40" WidthRequest="40" FontSize="30" Padding="0" CornerRadius="40" Margin="5" Clicked="plusBtn_Clicked" FontAttributes="Bold" TextColor="#e1f3d8" BackgroundColor="#0a5c41"></Button>
+                    </HorizontalStackLayout>
+                </Frame>
+                <HorizontalStackLayout Margin="0">
+                    <ImageButton x:Name="Refresh_btn" Source="refresh.svg" Clicked="Refresh_btn_Clicked" HeightRequest="35" WidthRequest="35" CornerRadius="40" BackgroundColor="Green"/>
                 </HorizontalStackLayout>
-            </Frame>
-            <HorizontalStackLayout Margin="0">
-                <ImageButton x:Name="Refresh_btn" Source="refresh.svg" Clicked="Refresh_btn_Clicked" HeightRequest="35" WidthRequest="35" CornerRadius="40" BackgroundColor="Green"/>
+
             </HorizontalStackLayout>
-            
-        </HorizontalStackLayout>
-        <ScrollView HorizontalOptions="Center" >
-            <FlexLayout x:Name="ElementsLayout"
-                Padding="5"
-                Direction="Row"
-                JustifyContent="Center"
-                AlignItems="Center"
-                Wrap="Wrap"
-                AlignContent="Center"
-                >
-            </FlexLayout>
-        </ScrollView>
-    </VerticalStackLayout>
-    
+            <ScrollView HorizontalOptions="Center" VerticalOptions="FillAndExpand">
+                <FlexLayout x:Name="ElementsLayout"
+            Padding="5"
+            Direction="Row"
+            JustifyContent="Center"
+            AlignItems="Center"
+            Wrap="Wrap"
+            AlignContent="Center">
+                </FlexLayout>
+            </ScrollView>
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>

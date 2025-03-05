@@ -15,7 +15,7 @@
            CornerRadius="10"
            Padding="20"
            Margin="0"
-           WidthRequest="320"
+           WidthRequest="290"
            HasShadow="True"
            VerticalOptions="Center"
            HorizontalOptions="Center">
@@ -28,12 +28,8 @@
 
             <StackLayout Spacing="25">
 
-                <Button Clicked="Button_Clicked">
-
-                </Button>
-
                 <!-- Title -->
-                <Label x:Name="MainTextLabel" Text="Login" FontSize="35" FontAttributes="Bold" 
+                <Label FontFamily="Poppins-Medium" x:Name="MainTextLabel" Text="Login" FontSize="35" FontAttributes="Bold" 
                    HorizontalOptions="Center" TextColor="Black"/>
 
                 <StackLayout Spacing="15">
@@ -41,16 +37,16 @@
 
                     <!-- Email Input -->
                     <StackLayout>
-                        <Label x:Name="EmailLabel" Text="Email" FontSize="16" TextColor="Black"/>
-                        <Entry x:Name="txtEmail" Placeholder="Email"
+                        <Label FontFamily="Poppins-Medium" x:Name="EmailLabel" Text="Email" FontSize="16" TextColor="Black"/>
+                        <Entry FontFamily="Poppins-Medium" x:Name="txtEmail" Placeholder="Email"
                         Keyboard="Email" BackgroundColor="#F7F7F7"
                         TextColor="Black"/>
                     </StackLayout>
 
                     <!-- Password Input -->
                     <StackLayout>
-                        <Label x:Name="PasswordLabel" Text="Password" FontSize="16" TextColor="Black"/>
-                        <Entry x:Name="txtPassword" Placeholder="Password"
+                        <Label FontFamily="Poppins-Medium" x:Name="PasswordLabel" Text="Password" FontSize="16" TextColor="Black"/>
+                        <Entry FontFamily="Poppins-Medium" x:Name="txtPassword" Placeholder="Password"
                         IsPassword="True" BackgroundColor="#F7F7F7"
                         TextColor="Black"/>
                     </StackLayout>
@@ -58,13 +54,13 @@
                     <!-- Remember Password Checkbox -->
                     <StackLayout Orientation="Horizontal">
                         <CheckBox x:Name="RememberMeCheckBox"/>
-                        <Label x:Name="RememberMeLabel" Text="Remember me?" FontSize="14"
+                        <Label FontFamily="Poppins-Medium" x:Name="RememberMeLabel" Text="Remember me?" FontSize="14"
                         VerticalOptions="Center" TextColor="#0a5d40"/>
                     </StackLayout>
 
 
                     <!-- Login Button -->
-                    <Button x:Name="MainButtonLabel"
+                    <Button FontFamily="Poppins-Medium" x:Name="MainButtonLabel"
                         Text="Login"
                         BackgroundColor="#0F4D36"
                         TextColor="#e0f2d8"
@@ -75,7 +71,7 @@
                     <!-- Register Navigation -->
                     <StackLayout Orientation="Horizontal"
                              HorizontalOptions="Center">
-                        <Label x:Name="RegisterNavigationLabel" Text="Don't have an account? Click here."
+                        <Label FontFamily="Poppins-Medium" x:Name="RegisterNavigationLabel" Text="Don't have an account? Click here."
                            FontSize="12"
                            TextDecorations="Underline"
                            TextColor="#0a5d40">

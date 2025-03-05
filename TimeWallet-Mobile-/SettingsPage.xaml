@@ -28,14 +28,14 @@
             <StackLayout Spacing="25">
 
                 <!-- Name -->
-                <Label x:Name="MainText" Text="Settings" FontSize="35" FontAttributes="Bold" 
+                <Label FontFamily="Poppins-Medium" x:Name="MainText" Text="Settings" FontSize="35" FontAttributes="Bold" 
                 HorizontalOptions="Center" TextColor="Black"/>
 
                 <StackLayout Spacing="15">
 
                     <!-- Language Input -->
                     <HorizontalStackLayout Spacing="10">
-                        <Label x:Name="LangualeLabel" VerticalOptions="Center" Text="Language:" FontSize="21" TextColor="#0a5c41" FontAttributes="Bold"/>
+                        <Label FontFamily="Poppins-Medium" x:Name="LangualeLabel" VerticalOptions="Center" Text="Language:" FontSize="21" TextColor="#0a5c41" FontAttributes="Bold"/>
                         <Frame Padding="4" CornerRadius="10" BackgroundColor="#0a5c41">
                             <Picker x:Name="LanguagePicker" HeightRequest="40" WidthRequest="100" Background="#0a5c41"
                             SelectedIndexChanged="LanuagePicker_SelectedIndexChanged"/>
@@ -44,7 +44,7 @@
 
                     <!-- Theme Input -->
                     <HorizontalStackLayout Spacing="10">
-                        <Label x:Name="ThemeLabel" Text="Theme:" FontSize="21" TextColor="#0a5c41" FontAttributes="Bold" VerticalOptions="Center" />
+                        <Label FontFamily="Poppins-Medium" x:Name="ThemeLabel" Text="Theme:" FontSize="21" TextColor="#0a5c41" FontAttributes="Bold" VerticalOptions="Center" />
                         <Border StrokeThickness="0" BackgroundColor="Transparent">
                             <Border.Shadow>
                                 <Shadow Brush="Black" Opacity="0.5" Offset="5,5" Radius="10"/>
@@ -85,31 +85,47 @@
             <StackLayout Spacing="25">
 
                 <!-- Name -->
-                <Label x:Name="MainText_2" Text="Profile Settings" FontSize="35" FontAttributes="Bold" 
+                <Label FontFamily="Poppins-Medium" x:Name="MainText_2" Text="Profile Settings" FontSize="35" FontAttributes="Bold" 
                 HorizontalOptions="Center" TextColor="Black"/>
 
                 <StackLayout Spacing="15">
 
                     <!-- Name Input -->
                     <VerticalStackLayout Spacing="5">
-                        <Label x:Name="NameLabel" VerticalOptions="Center" Text="User name:" FontSize="21" TextColor="#0a5c41" FontAttributes="Bold"/>
-                        <Entry x:Name="UserNameEntry" BackgroundColor="White" TextColor="Black"></Entry>
+                        <Label FontFamily="Poppins-Medium" x:Name="NameLabel" VerticalOptions="Center" Text="User name:" FontSize="21" TextColor="#0a5c41" FontAttributes="Bold"/>
+                        <Entry FontFamily="Poppins-Medium" x:Name="UserNameEntry" BackgroundColor="White" TextColor="Black"></Entry>
                     </VerticalStackLayout>
 
-                    <!-- Amount Input -->
+                    <!-- Email Input -->
                     <VerticalStackLayout Spacing="5">
-                        <Label x:Name="EmailLabel" Text="Email:" FontSize="21" TextColor="#0a5c41" FontAttributes="Bold" VerticalOptions="Center"/>
-                        <Entry x:Name="EmailEntry" BackgroundColor="White" TextColor="Black"></Entry>
+                        <Label FontFamily="Poppins-Medium" x:Name="EmailLabel" Text="Email:" FontSize="21" TextColor="#0a5c41" FontAttributes="Bold" VerticalOptions="Center"/>
+                        <Entry FontFamily="Poppins-Medium" x:Name="EmailEntry" BackgroundColor="White" TextColor="Black"></Entry>
                     </VerticalStackLayout>
 
-                    <Button x:Name="SaveBtn"
-                        Text="Save"
-                        BackgroundColor="#0F4D36"
-                        TextColor="#e0f2d8"
-                        FontSize="18"
-                        CornerRadius="8"
-                        Clicked="SaveBtn_Clicked"
-                    VerticalOptions="End"/>
+                    <HorizontalStackLayout Spacing="67">
+                        <Button FontFamily="Poppins-Medium" x:Name="SaveBtn"
+                                Text="Save"
+                                BackgroundColor="#0F4D36"
+                                TextColor="#e0f2d8"
+                                FontSize="18"
+                                CornerRadius="8"
+                                Clicked="SaveBtn_Clicked"
+                                VerticalOptions="End"
+                                HorizontalOptions="Center"/>
+                        
+                        <Button FontFamily="Poppins-Medium" x:Name="LogOutBtn"
+                                Text="Log Out"
+                                BackgroundColor="#0F4D36"
+                                TextColor="#e0f2d8"
+                                FontSize="18"
+                                CornerRadius="8"
+                                Clicked="Button_Clicked"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Center"
+                                />
+                    </HorizontalStackLayout>
+
+                    
 
 
 

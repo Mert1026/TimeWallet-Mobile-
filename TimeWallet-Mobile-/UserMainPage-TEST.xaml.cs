@@ -70,7 +70,10 @@ public partial class UserMainPage_TEST : ContentPage
 
     private async void ElementsCheck()
     {
-        if(_entries != null)
+        tenItems_btn.IsVisible = true;
+        fiveItems_btn.IsVisible = true;
+        threeItems_btn.IsVisible = true;
+        if (_entries != null)
         {
             if (_entries.Count() < 10)
             {
@@ -222,7 +225,7 @@ public partial class UserMainPage_TEST : ContentPage
             await DisplayAlert("Atention", "Error occured! Try again later.", "Ok");
             await Navigation.PopAsync();
         }
-        else if (language == "en")
+        else if (language == "English")
         {
             _translations = new Translations("en");
         }
@@ -245,6 +248,12 @@ public partial class UserMainPage_TEST : ContentPage
         base.OnAppearing();
         AddEntries();
         ButtonsCalibration();
+        ElementsCheck();
         // Refresh data when the page appears
     }
+    protected override bool OnBackButtonPressed()
+    {
+        return true; // Prevents going back
+    }
+
 }

@@ -33,7 +33,7 @@
             <StackLayout Spacing="25">
 
                 <!-- Title -->
-                <Label Text="Register" FontSize="35" FontAttributes="Bold" 
+                <Label FontFamily="Poppins-Medium" Text="Register" FontSize="35" FontAttributes="Bold" 
                    HorizontalOptions="Center" TextColor="Black"/>
 
                 <StackLayout Spacing="15">
@@ -41,8 +41,8 @@
 
                     <!-- Name Input -->
                     <StackLayout>
-                        <Label Text="Name" FontSize="16" TextColor="Black"/>
-                        <Entry x:Name="txtName" Placeholder="Name"
+                        <Label FontFamily="Poppins-Medium" Text="Name" FontSize="16" TextColor="Black"/>
+                        <Entry FontFamily="Poppins-Medium" x:Name="txtName" Placeholder="Name"
                            Keyboard="Email"
                            BackgroundColor="#F7F7F7"
                            TextColor="Black"/>
@@ -51,22 +51,22 @@
 
                     <!-- Email Input -->
                     <StackLayout>
-                        <Label Text="Email" FontSize="16" TextColor="Black"/>
-                        <Entry x:Name="txtEmail" Placeholder="Email"
+                        <Label FontFamily="Poppins-Medium" Text="Email" FontSize="16" TextColor="Black"/>
+                        <Entry FontFamily="Poppins-Medium" x:Name="txtEmail" Placeholder="Email"
                            Keyboard="Email" BackgroundColor="#F7F7F7"
                            TextColor="Black"/>
                     </StackLayout>
 
                     <!-- Password Input -->
                     <StackLayout>
-                        <Label Text="Password" FontSize="16" TextColor="Black"/>
-                        <Entry x:Name="txtPassword" Placeholder="Password"
+                        <Label FontFamily="Poppins-Medium" Text="Password" FontSize="16" TextColor="Black"/>
+                        <Entry FontFamily="Poppins-Medium" x:Name="txtPassword" Placeholder="Password"
                            IsPassword="True" BackgroundColor="#F7F7F7"
                            TextColor="Black"/>
                     </StackLayout>
 
                     <!-- Register Button -->
-                    <Button Text="Register"
+                    <Button FontFamily="Poppins-Medium" Text="Register"
                         BackgroundColor="#0F4D36"
                         TextColor="#e0f2d8"
                         FontSize="18"

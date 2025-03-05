@@ -1,3 +1,4 @@
+﻿
 using Microsoft.Maui.ApplicationModel.Communication;
 using Microsoft.Maui.Controls.Compatibility;
 using Newtonsoft.Json;
@@ -56,7 +57,7 @@ public partial class CameraPage : ContentPage
         var status = await Permissions.RequestAsync<Permissions.Camera>();
         if (status != PermissionStatus.Granted)
         {
-            await DisplayAlert("Error", "Camera permission is required to use this feature.", "OK");
+            await DisplayAlert(_translations.Error, _translations.CameraPermissionError, _translations.Error);
             await Navigation.PopAsync();
         }
     }
@@ -98,7 +99,7 @@ public partial class CameraPage : ContentPage
 
         if(_userBudgets.Count <= 0)
         {
-            await DisplayAlert("Attention", "Add some budgets firtsly!", "Ok");
+            await DisplayAlert(_translations.Atention, _translations.DontHaveAnyBudgets, _translations.OkText);
             await Navigation.PopAsync(); return;
         }
         
@@ -121,12 +122,11 @@ public partial class CameraPage : ContentPage
                             scanner.IsDetecting = false; // Stop detecting barcodes
                         }
 
-                        await DisplayAlert("Barcode Detected", first.Value, "OK");
                         _receiptId = parts[1];
                         ReceiptDTO receiptInfo = await _apiService.GetReceiptAsync(email, _receiptId);
                         if (receiptInfo.Receipt == null)
                         {
-                            await DisplayAlert("Atention", "There is no receipt in existence with the following parameters!", "Ok");
+                            await DisplayAlert(_translations.Atention,_translations.DontHaveReceiptExisting , _translations.OkText);
                             await Navigation.PopAsync();
                         }
                         UserDTO userInfo = await _apiService.GetUserAsync(email);
@@ -144,7 +144,7 @@ public partial class CameraPage : ContentPage
                     }
                     else
                     {
-                        await DisplayAlert("Error", "Invalid barcode format.", "OK");
+                        await DisplayAlert(_translations.Error, _translations.ErrorBarcode, _translations.OkText);
                     }
                 }
                 finally
@@ -184,11 +184,12 @@ public partial class CameraPage : ContentPage
 
     private async void ClearPage()
     {
+        ButtonsCalibration();
         // Remove all children from the main layout
         string email = await SecureStorage.GetAsync("UserEmail");
         ReceiptDTO receiptInfo = await _apiService.GetReceiptAsync(email, _receiptId);
 
-        // Clear the layout first
+        // Clear the layout(Първо!)
         if (Content is Layout<View> layout)
         {
             layout.Children.Clear();
@@ -200,20 +201,19 @@ public partial class CameraPage : ContentPage
         //======= TITLE SECTION =======
         var titleLabel = new Label
         {
-            Text = "Selection Page",
+            Text = _translations.SelectionPageMainText,
             FontSize = 24,
             TextColor = Color.FromArgb("#0a5c41"),
             HorizontalOptions = LayoutOptions.Center,
             FontAttributes = FontAttributes.Bold,
             Margin = new Thickness(0, 10, 0, 10) // Spacing around the title
         };
-        itemLayouts.Children.Add(titleLabel); // Add title to main layout
-                                              // ==============================
+        itemLayouts.Children.Add(titleLabel); 
 
-        // A dictionary to map each item to the selected budget ID
+        // A dictionary to map each item to the selected budged
         var itemToBudgetMap = new Dictionary<string, Guid>();
 
-        // Display each receipt item with a Label and Picker
+        
         foreach (var item in receiptInfo.Items)
         {
             var itemLayout = new HorizontalStackLayout
@@ -225,7 +225,7 @@ public partial class CameraPage : ContentPage
             // Label for item name
             Label itemNameLabel = new Label
             {
-                Text = item.Name,
+                Text = item.Name + $" ({item.Amount.ToString()})",
                 FontSize = 18,
                 TextColor = Color.FromArgb("#0a5c41"),
                 HorizontalOptions = LayoutOptions.Center,
@@ -237,7 +237,7 @@ public partial class CameraPage : ContentPage
             var picker = new Picker
             {
                 ItemsSource = _userBudgets.Select(b => b.Name).ToList(),
-                SelectedIndex = 0,
+                SelectedIndex = -1,
                 BackgroundColor = Colors.Transparent, // Transparent inside the frame
                 TextColor = Color.FromArgb("#e1f2d9")
             };
@@ -245,9 +245,9 @@ public partial class CameraPage : ContentPage
             var pickerFrame = new Frame
             {
                 CornerRadius = 10, // Rounded corners
-                Padding = new Thickness(5), // Padding inside the frame
-                BackgroundColor = Color.FromArgb("#0a5c41"), // Frame background
-                BorderColor = Color.FromArgb("#0a5c41"), // Border color
+                Padding = new Thickness(5),
+                BackgroundColor = Color.FromArgb("#0a5c41"),
+                BorderColor = Color.FromArgb("#0a5c41"),
                 Shadow = new Shadow
                 {
                     Brush = new SolidColorBrush(Colors.Black),
@@ -258,7 +258,7 @@ public partial class CameraPage : ContentPage
                 Content = picker
             };
 
-            // Store the selected budget ID in the dictionary when selected
+            
             picker.SelectedIndexChanged += (sender, e) =>
             {
                 var selectedBudgetName = picker.SelectedItem?.ToString();
@@ -266,30 +266,30 @@ public partial class CameraPage : ContentPage
 
                 if (selectedBudget != null)
                 {
-                    // Log the item ID and selected budget ID to verify they are correct
+                    
                     Console.WriteLine($"Selected Item ID: {item.id}");
                     Console.WriteLine($"Selected Budget ID: {selectedBudget.Id}");
 
-                    // Store the selected budget ID in the dictionary, with item ID (string) as the key
+                    
                     itemToBudgetMap[item.id] = selectedBudget.Id;
                 }
                 else
                 {
-                    // Log if no budget was found
+                    
                     Console.WriteLine($"No budget found for: {selectedBudgetName}");
                 }
             };
 
 
             itemLayout.Children.Add(itemNameLabel);
-            itemLayout.Children.Add(pickerFrame); // Add Frame containing Picker
+            itemLayout.Children.Add(pickerFrame); 
             itemLayouts.Children.Add(itemLayout);
 
-            // Add a horizontal line (BoxView) after each item
+            
             itemLayouts.Children.Add(new BoxView
             {
-                Color = Color.FromArgb("#0a5c41"), // Line color
-                HeightRequest = 1, // Thickness of the line
+                Color = Color.FromArgb("#0a5c41"),
+                HeightRequest = 1,
                 HorizontalOptions = LayoutOptions.FillAndExpand, // Full width
                 Margin = new Thickness(0, 10) // Space around the line
             });
@@ -330,14 +330,38 @@ public partial class CameraPage : ContentPage
                 }
             }
 
-            await DisplayAlert("Success", "Expenses have been added to the selected budgets.", "OK");
+            await DisplayAlert(_translations.Success, _translations.SuccessAddedExpenses, _translations.OkText);
             await Navigation.PopAsync();
         };
 
-        // Add the "Accomplish" button below the items layout
-        itemLayouts.Children.Add(accomplishButton);
+        ImageButton infoButton = new ImageButton
+        {
+            Source = "info.svg",
+            HeightRequest = 50,
+            WidthRequest = 50,
+            CornerRadius = 10, 
+            Padding = 5,
+            BackgroundColor = Color.FromArgb("#215fe3"),
+            HorizontalOptions = LayoutOptions.Center,
+            Margin = new Thickness(5, 10) // Keep equal margin for symmetry
+        };
 
-        // Set the content to the new layout
+        // Display alert when clicked
+        infoButton.Clicked += async (sender, e) =>
+        {
+            await DisplayAlert(_translations.SelectionPageInfoLabel, _translations.SelectionPageInfoText, _translations.OkText);
+        };
+
+        // Layout to arrange buttons horizontally
+        var buttonLayout = new HorizontalStackLayout
+        {
+            HorizontalOptions = LayoutOptions.Center,
+            Spacing = 10, // Space between buttons
+            Children = { accomplishButton, infoButton }
+        };
+
+        // Add the buttons below the items layout
+        itemLayouts.Children.Add(buttonLayout);
         Content = itemLayouts;
     }
 
@@ -374,8 +398,6 @@ public partial class CameraPage : ContentPage
 
             await _apiService.AddElementAsync(element, email);
         }
-
-        await DisplayAlert("Success", "Expense added to budget.", "Ok");
 
         // Check if this is the last expense
         if (currentIndex == receiptInfo.Items.Count - 1)
@@ -432,14 +454,26 @@ public partial class CameraPage : ContentPage
         string theme = await SecureStorage.GetAsync("Theme");
         if (theme == null)
         {
-            await DisplayAlert("Atention", "Error", "Ok");
+            await DisplayAlert("Atention", "Error occured! Try again later.", "Ok");
         }
         else if (theme == "light")
         {
+            Microsoft.Maui.Controls.Application.Current.Resources["Primary"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDark"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDarkText"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["Secondary"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["SecondaryDarkText"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["Tertiary"] = Color.FromHex("#e0f2d8");
             this.BackgroundColor = Color.FromArgb("#e0f2d8");
         }
         else
         {
+            Microsoft.Maui.Controls.Application.Current.Resources["Primary"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDark"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDarkText"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["Secondary"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["SecondaryDarkText"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["Tertiary"] = Color.FromHex("#a9d494");
             this.BackgroundColor = Color.FromArgb("#a9d494");
         }
 
@@ -450,9 +484,9 @@ public partial class CameraPage : ContentPage
             await DisplayAlert("Atention", "Error occured! Try again later.", "Ok");
             await Navigation.PopAsync();
         }
-        else if (language == "en")
+        else if (language == "English")
         {
-            _translations = new Translations("en");
+            _translations = new Translations("English");
         }
         else
         {

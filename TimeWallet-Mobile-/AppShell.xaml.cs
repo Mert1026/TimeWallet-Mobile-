@@ -25,20 +25,20 @@ namespace TimeWallet_Mobile_
         private async void SetStartupPage()
         {
 
-            string email = await SecureStorage.GetAsync("UserEmail");
+            string email = "";
             //string email = "memo@gmail.com";
 
             if (string.IsNullOrEmpty(email))
             {
                 // Navigate to LoginPage if no email is found
-                await GoToAsync(nameof(LoginPage));
+                //await Navigation.PushAsync(new StartUpPage());
             }
             else
             {
                 // Navigate to Home (default tab)
-                // await GoToAsync(nameof(LoginPage));
+                 await GoToAsync(nameof(UserMainPage_TEST));
                 //CurrentItem = Items.FirstOrDefault(item => item.Route == "userMainTest");
-                CurrentItem = FindByName("userMainTest") as Tab;
+                //await Shell.Current.GoToAsync(new UserMainPage_TEST());
             }
         }
     }

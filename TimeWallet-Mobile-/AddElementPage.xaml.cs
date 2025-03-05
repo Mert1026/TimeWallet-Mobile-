@@ -29,7 +29,6 @@ public partial class AddElementPage : ContentPage
     {
         var picker = (Picker)sender;
         string selectedCategory = (string)picker.SelectedItem;
-        DisplayAlert("Selection", $"You selected: {selectedCategory}", "OK");
     }
 
     private async void GetUserEmail()
@@ -45,12 +44,12 @@ public partial class AddElementPage : ContentPage
         var budgets = JsonConvert.DeserializeObject<List<Budgets>>(userBudgetResponse.budgetJson);
         if (budgets == null)
         {
-            await DisplayAlert("Atention", "Error", "Ok");
+            await DisplayAlert(_translations.Atention, _translations.Error, _translations.OkText);
             await Navigation.PopAsync();
         }
    else if (!(budgets.Count > 0))
         {
-            await DisplayAlert("Atention", "You don't have any budgets in order to add element. Consider making one.", "Ok");
+            await DisplayAlert(_translations.Atention, _translations.DontHaveAnyBudgets, _translations.OkText);
             await Navigation.PopAsync();
         }
         _budgets = budgets;
@@ -66,15 +65,15 @@ public partial class AddElementPage : ContentPage
     {
         if (String.IsNullOrEmpty(txtName.Text))
         {
-            await DisplayAlert("Atention", "The Name label is required! Consider filling it.", "Ok");
+            await DisplayAlert(_translations.Atention, _translations.ErrorNameLabel, _translations.OkText);
         }
         else if (String.IsNullOrEmpty(txtAmount.Text))
         {
-            await DisplayAlert("Atention", "The Amount label is required! Consider filling it.", "Ok");
+            await DisplayAlert(_translations.Atention, _translations.ErrorAmountLabel, _translations.OkText);
         }
-        else if (String.IsNullOrEmpty(BudgetsPicker.SelectedItem.ToString()))
+        else if (BudgetsPicker.SelectedIndex == -1)
         {
-            await DisplayAlert("Atention", "You should pick where to add this element! Consider picking it.", "Ok");
+            await DisplayAlert(_translations.Atention, _translations.DontHaveSelectedBudget, _translations.OkText);
         }
         else
         {
@@ -100,14 +99,26 @@ public partial class AddElementPage : ContentPage
         string theme = await SecureStorage.GetAsync("Theme");
         if (theme == null)
         {
-            await DisplayAlert("Atention", "Error", "Ok");
+            await DisplayAlert(_translations.Atention, _translations.Error, _translations.OkText);
         }
         else if (theme == "light")
         {
+            Microsoft.Maui.Controls.Application.Current.Resources["Primary"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDark"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDarkText"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["Secondary"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["SecondaryDarkText"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["Tertiary"] = Color.FromHex("#e0f2d8");
             this.BackgroundColor = Color.FromArgb("#e0f2d8");
         }
         else
         {
+            Microsoft.Maui.Controls.Application.Current.Resources["Primary"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDark"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDarkText"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["Secondary"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["SecondaryDarkText"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["Tertiary"] = Color.FromHex("#a9d494");
             this.BackgroundColor = Color.FromArgb("#a9d494");
         }
 
@@ -115,10 +126,10 @@ public partial class AddElementPage : ContentPage
 
         if (language == null)
         {
-            await DisplayAlert("Atention", "Error occured! Try again later.", "Ok");
+            await DisplayAlert(_translations.Atention, _translations.Error, _translations.OkText);
             await Navigation.PopAsync();
         }
-        else if (language == "en")
+        else if (language == "English")
         {
             _translations = new Translations("en");
         }

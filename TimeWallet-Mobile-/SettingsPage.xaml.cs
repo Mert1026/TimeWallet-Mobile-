@@ -21,8 +21,8 @@ public partial class SettingsPage : ContentPage
 
     private void PickerFill()
     {
-        LanguagePicker.Items.Add("bg");
-        LanguagePicker.Items.Add("en");
+        LanguagePicker.Items.Add("Български");
+        LanguagePicker.Items.Add("English");
     }
 
     private async void ButtonsCalibration()
@@ -36,6 +36,12 @@ public partial class SettingsPage : ContentPage
         {
             _selectedTheme = "light";
             ThemeBtn.BackgroundColor = Color.FromArgb("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["Primary"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDark"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDarkText"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["Secondary"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["SecondaryDarkText"] = Color.FromHex("#e0f2d8");
+            Microsoft.Maui.Controls.Application.Current.Resources["Tertiary"] = Color.FromHex("#e0f2d8");
             this.BackgroundColor = Color.FromArgb("#e0f2d8");
             ThemeBtn.Source = "sun.svg";
         }
@@ -43,6 +49,12 @@ public partial class SettingsPage : ContentPage
         {
             _selectedTheme = "night";
             ThemeBtn.BackgroundColor = Color.FromArgb("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["Primary"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDark"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["PrimaryDarkText"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["Secondary"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["SecondaryDarkText"] = Color.FromHex("#a9d494");
+            Microsoft.Maui.Controls.Application.Current.Resources["Tertiary"] = Color.FromHex("#a9d494");
             this.BackgroundColor = Color.FromArgb("#a9d494");
             ThemeBtn.Source = "sunandcloud.svg";
         }
@@ -55,7 +67,7 @@ public partial class SettingsPage : ContentPage
             await DisplayAlert("Atention", "Error occured! Try again later.", "Ok");
             await Navigation.PopAsync();
         }
-        else if(language ==  "en")
+        else if(language ==  "English")
         {
             _translations = new Translations("en");
             LanguagePicker.SelectedIndex = 1;
@@ -89,7 +101,14 @@ public partial class SettingsPage : ContentPage
     {
         var picker = (Microsoft.Maui.Controls.Picker)sender;
         string selectedLanguage = (string)picker.SelectedItem;
-        _selectedLanguage = selectedLanguage;
+        if(selectedLanguage == "English")
+        {
+            _selectedLanguage = "en";
+        }
+        else
+        {
+            _selectedLanguage = "bg";
+        }      
         await SecureStorage.SetAsync("language", selectedLanguage);
         _translations = new Translations(selectedLanguage);
         ButtonsCalibration();
@@ -105,6 +124,7 @@ public partial class SettingsPage : ContentPage
         NameLabel.Text = _translations.UserNameLabelText;
         EmailLabel.Text = _translations.UserEmailLabelText;
         SaveBtn.Text = _translations.SettingsPageSaveBtnText;
+        LogOutBtn.Text = _translations.SettingsPageLogOutBtnText;
     }
 
     private async void SaveBtn_Clicked(object sender, EventArgs e)
@@ -125,5 +145,10 @@ public partial class SettingsPage : ContentPage
         {
             await DisplayAlert("Atention", "Error occured! Try again later.", "Ok");
         }
+    }
+
+    private async void Button_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopToRootAsync();
     }
 }

@@ -11,11 +11,11 @@
 
     <ShellContent
 
-        Title="Login"
+        Title="StartUp"
 
-        ContentTemplate="{DataTemplate local:LoginPage}"
+        ContentTemplate="{DataTemplate local:StartUpPage}"
 
-        Route="Login" />
+        Route="StartUp" />
 
     <!-- ShellContent for LoginPage, outside of TabBar -->
     <TabBar>

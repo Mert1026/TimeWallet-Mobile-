@@ -31,27 +31,27 @@
 
                     <!-- Name -->
                     <Label x:Name="MainText" Text="Add Budget" FontSize="35" FontAttributes="Bold" 
-            HorizontalOptions="Center" TextColor="Black"/>
+            HorizontalOptions="Center" TextColor="Black" FontFamily="Poppins-Medium"/>
 
                     <StackLayout Spacing="15">
 
                         <!-- Name Input -->
                         <StackLayout>
-                            <Label x:Name="NameLabel" Text="Name" FontSize="16" TextColor="Black"/>
-                            <Entry x:Name="txtName" Placeholder="Name"
+                            <Label FontFamily="Poppins-Medium" x:Name="NameLabel" Text="Name" FontSize="16" TextColor="Black"/>
+                            <Entry FontFamily="Poppins-Medium" x:Name="txtName" Placeholder="Name"
                     Keyboard="Text" BackgroundColor="#F7F7F7"
                     TextColor="Black"/>
                         </StackLayout>
 
                         <!-- Amount Input -->
                         <StackLayout>
-                            <Label x:Name="AmountLabel" Text="Amount" FontSize="16" TextColor="Black"/>
-                            <Entry x:Name="txtAmount" Placeholder="Amount" BackgroundColor="#F7F7F7"
-                    TextColor="Black"/>
+                            <Label FontFamily="Poppins-Medium" x:Name="AmountLabel" Text="Amount" FontSize="16" TextColor="Black"/>
+                            <Entry FontFamily="Poppins-Medium" x:Name="txtAmount" Placeholder="Amount" BackgroundColor="#F7F7F7"
+                    TextColor="Black" Keyboard="Numeric"/>
                         </StackLayout>
 
                         <!-- Add Button -->
-                        <Button x:Name="MainButtonLabel"
+                        <Button FontFamily="Poppins-Medium" x:Name="MainButtonLabel"
                 Text="Add"
                 BackgroundColor="#0F4D36"
                 TextColor="#e0f2d8"
@@ -63,16 +63,6 @@
 
                 </StackLayout>
             </Frame>
-
-            <!-- Result Text -->
-            <StackLayout Orientation="Horizontal"
-     HorizontalOptions="Center">
-                <Label x:Name="txtResult"
-   Text=""
-   FontSize="21"
-   TextDecorations="Underline"
-   TextColor="#0a5d40"/>
-            </StackLayout>
 
         </Grid>
         <Button x:Name="goBack_Btn" Clicked="goBack_Btn_Clicked" HeightRequest="50" WidthRequest="80" ImageSource="arrowleft.svg" BackgroundColor="#0a5c41" VerticalOptions="End" HorizontalOptions="Start"></Button>
